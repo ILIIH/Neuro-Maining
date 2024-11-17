@@ -56,6 +56,14 @@
             </intent-filter>
         </receiver>
 
+        <receiver
+            android:name=".broadcast_receivers.LowBatteryReceiver"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="android.intent.action.BATTERY_LOW" />
+            </intent-filter>
+        </receiver>
+
     </application>
 
 </manifest>
