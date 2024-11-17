@@ -1,6 +1,9 @@
 package com.example.neuro_maining
 
+import android.content.Context
 import android.content.Intent
+import android.content.IntentFilter
+import android.net.ConnectivityManager
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -11,13 +14,16 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.example.neuro_maining.broadcast_receivers.InternetConnectivityReceiver
 import com.example.neuro_maining.services.NeuronMiningService
 import com.example.neuro_maining.ui.theme.NeuroMainingTheme
+
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         startService()
+        registerBroadcastsReceivers(context = applicationContext)
         setContent {
             NeuroMainingTheme {
                 Surface(
@@ -33,6 +39,12 @@ class MainActivity : ComponentActivity() {
     private fun startService(){
         val serviceIntent = Intent(this, NeuronMiningService::class.java)
         startService(serviceIntent)
+    }
+
+    private fun registerBroadcastsReceivers(context: Context){
+        val filter = IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION)
+        context.registerReceiver(InternetConnectivityReceiver(), filter)
+
     }
 }
 
