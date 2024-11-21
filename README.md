@@ -14,3 +14,5 @@ It takes a lot of time and resources to train a large neural network. Giant comp
 ## **2. Flowchart diagram:**
 
 ![Flowchart diagram](Documentation/images/diagram.jpeg)
+![Nodes diagram](Documentation/images/nodes_diagram.jpeg)
+
