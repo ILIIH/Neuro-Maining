@@ -27,7 +27,6 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         startService(context = applicationContext)
         registerBroadcastsReceivers(context = applicationContext)
-        promptEnableWifi(context = applicationContext)
         setContent {
             NeuroMainingTheme {
                 Surface(
@@ -40,12 +39,16 @@ class MainActivity : ComponentActivity() {
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+        promptEnableWifi(applicationContext)
+    }
     private fun promptEnableWifi(context: Context) {
         val wifiManager = context.getSystemService(Context.WIFI_SERVICE) as WifiManager
         if (!wifiManager.isWifiEnabled) {
             AlertDialog.Builder(context)
                 .setTitle("Enable WiFi")
-                .setMessage("This feature requires WiFi to be enabled. Would you like to enable it?")
+                .setMessage("This application requires WiFi to be enabled. Would you like to enable it?")
                 .setPositiveButton("Yes") { _, _ ->
                     val intent = Intent(android.provider.Settings.ACTION_WIFI_SETTINGS)
                     context.startActivity(intent)
