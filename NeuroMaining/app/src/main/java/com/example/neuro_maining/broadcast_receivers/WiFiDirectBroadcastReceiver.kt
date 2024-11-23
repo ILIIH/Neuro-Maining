@@ -7,6 +7,7 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.wifi.p2p.WifiP2pDevice
 import android.net.wifi.p2p.WifiP2pManager
+import android.util.Log
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 
@@ -17,7 +18,7 @@ class WiFiDirectBroadcastReceiver(
 ) : BroadcastReceiver() {
     override fun onReceive(context: Context, intent: Intent) {
         val action = intent.action
-        if (WifiP2pManager.WIFI_P2P_PEERS_CHANGED_ACTION == action) {
+        if (WifiP2pManager.WIFI_P2P_STATE_CHANGED_ACTION == action) {
             if (ActivityCompat.checkSelfPermission(
                     context,
                     Manifest.permission.ACCESS_FINE_LOCATION
@@ -26,9 +27,11 @@ class WiFiDirectBroadcastReceiver(
                     Manifest.permission.NEARBY_WIFI_DEVICES
                 ) != PackageManager.PERMISSION_GRANTED
             ) {
+
                 if (ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED ||
                     ActivityCompat.checkSelfPermission(context, Manifest.permission.NEARBY_WIFI_DEVICES) != PackageManager.PERMISSION_GRANTED
                 ) {
+                    Log.d("WiFiDirectReceiver", "permission not garanted")
                 }
                 return
             }
@@ -40,7 +43,6 @@ class WiFiDirectBroadcastReceiver(
                 if (peers.isEmpty()) {
                     Toast.makeText(context, "No devices found", Toast.LENGTH_SHORT).show()
                 } else {
-                    // Show the list of devices
                     for (device in peers) {
                         Toast.makeText(
                             context,

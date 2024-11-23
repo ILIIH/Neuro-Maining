@@ -1,12 +1,16 @@
 package com.example.neuro_maining
 
+import android.Manifest
 import android.app.ActivityManager
 import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
+import android.content.pm.PackageManager
 import android.net.ConnectivityManager
 import android.net.wifi.WifiManager
+import android.net.wifi.p2p.WifiP2pManager
+import android.os.Build
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -17,7 +21,9 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.core.app.ActivityCompat
 import com.example.neuro_maining.broadcast_receivers.InternetConnectivityReceiver
+import com.example.neuro_maining.broadcast_receivers.WiFiDirectBroadcastReceiver
 import com.example.neuro_maining.services.NeuronMiningService
 import com.example.neuro_maining.ui.theme.NeuroMainingTheme
 
@@ -27,6 +33,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         startService(context = applicationContext)
         registerBroadcastsReceivers(context = applicationContext)
+        checkAndRequestPermission()
         setContent {
             NeuroMainingTheme {
                 Surface(
@@ -42,6 +49,24 @@ class MainActivity : ComponentActivity() {
     override fun onResume() {
         super.onResume()
         promptEnableWifi(applicationContext)
+    }
+
+    private fun checkAndRequestPermission() {
+        val permissions = mutableListOf<String>()
+
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            permissions.add(Manifest.permission.ACCESS_FINE_LOCATION)
+        }
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.NEARBY_WIFI_DEVICES) != PackageManager.PERMISSION_GRANTED) {
+                permissions.add(Manifest.permission.NEARBY_WIFI_DEVICES)
+            }
+        }
+
+        if (permissions.isNotEmpty()) {
+            ActivityCompat.requestPermissions(this, permissions.toTypedArray(), 1)
+        }
     }
     private fun promptEnableWifi(context: Context) {
         val wifiManager = context.getSystemService(Context.WIFI_SERVICE) as WifiManager
@@ -79,8 +104,20 @@ class MainActivity : ComponentActivity() {
 
     private fun registerBroadcastsReceivers(context: Context){
         val filter = IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION)
-        context.registerReceiver(InternetConnectivityReceiver(), filter)
+        context.registerReceiver(InternetConnectivityReceiver(), filter
+        )
 
+        val manager = getSystemService(Context.WIFI_P2P_SERVICE) as WifiP2pManager
+        val channel = manager.initialize(this, mainLooper, null)
+
+        val receiver = WiFiDirectBroadcastReceiver(manager, channel)
+        val intentFilter = IntentFilter().apply {
+            addAction(WifiP2pManager.WIFI_P2P_PEERS_CHANGED_ACTION)
+            addAction(WifiP2pManager.WIFI_P2P_STATE_CHANGED_ACTION)
+            addAction(WifiP2pManager.WIFI_P2P_CONNECTION_CHANGED_ACTION)
+            addAction(WifiP2pManager.WIFI_P2P_THIS_DEVICE_CHANGED_ACTION)
+        }
+        registerReceiver(receiver, intentFilter)
     }
 }
 
