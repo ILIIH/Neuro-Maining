@@ -7,6 +7,7 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.wifi.p2p.WifiP2pDevice
 import android.net.wifi.p2p.WifiP2pManager
+import android.os.Build
 import android.util.Log
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
@@ -22,16 +23,12 @@ class WiFiDirectBroadcastReceiver(
             if (ActivityCompat.checkSelfPermission(
                     context,
                     Manifest.permission.ACCESS_FINE_LOCATION
-                ) != PackageManager.PERMISSION_GRANTED || ActivityCompat.checkSelfPermission(
-                    context,
-                    Manifest.permission.NEARBY_WIFI_DEVICES
                 ) != PackageManager.PERMISSION_GRANTED
             ) {
 
-                if (ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED ||
-                    ActivityCompat.checkSelfPermission(context, Manifest.permission.NEARBY_WIFI_DEVICES) != PackageManager.PERMISSION_GRANTED
+                if (ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
                 ) {
-                    Log.d("WiFiDirectReceiver", "permission not garanted")
+                    Log.d("WiFiDirectReceiver", "no permission ACCESS_FINE_LOCATION ${ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) }")
                 }
                 return
             }
