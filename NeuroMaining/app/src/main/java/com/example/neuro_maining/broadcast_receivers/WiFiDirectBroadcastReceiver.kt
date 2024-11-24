@@ -25,11 +25,11 @@ class WiFiDirectBroadcastReceiver(
                     Manifest.permission.ACCESS_FINE_LOCATION
                 ) != PackageManager.PERMISSION_GRANTED
             ) {
-
-                if (ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
-                ) {
-                    Log.d("WiFiDirectReceiver", "no permission ACCESS_FINE_LOCATION ${ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) }")
-                }
+                Log.d("WiFiDirectReceiver", "no permission ACCESS_FINE_LOCATION ${ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) }")
+                return
+            }
+            if (ActivityCompat.checkSelfPermission( context, Manifest.permission.NEARBY_WIFI_DEVICES ) != PackageManager.PERMISSION_GRANTED && Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                Log.d("WiFiDirectReceiver", "no permission NEARBY_WIFI_DEVICES ${ActivityCompat.checkSelfPermission(context, Manifest.permission.NEARBY_WIFI_DEVICES) }")
                 return
             }
             manager.requestPeers(
@@ -50,6 +50,10 @@ class WiFiDirectBroadcastReceiver(
                 }
             }
         }
+    }
+
+    private fun checkPermissions(){
+
     }
 }
 

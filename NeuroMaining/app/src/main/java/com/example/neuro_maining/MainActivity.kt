@@ -12,6 +12,7 @@ import android.net.wifi.WifiManager
 import android.net.wifi.p2p.WifiP2pManager
 import android.os.Build
 import android.os.Bundle
+import android.provider.Settings
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
@@ -48,7 +49,7 @@ class MainActivity : ComponentActivity() {
 
     override fun onResume() {
         super.onResume()
-        promptEnableWifi(applicationContext)
+        promptEnableWifi(this)
     }
 
     private fun checkAndRequestPermission() {
@@ -68,6 +69,7 @@ class MainActivity : ComponentActivity() {
             ActivityCompat.requestPermissions(this, permissions.toTypedArray(), 1)
         }
     }
+
     private fun promptEnableWifi(context: Context) {
         val wifiManager = context.getSystemService(Context.WIFI_SERVICE) as WifiManager
         if (!wifiManager.isWifiEnabled) {
@@ -75,8 +77,7 @@ class MainActivity : ComponentActivity() {
                 .setTitle("Enable WiFi")
                 .setMessage("This application requires WiFi to be enabled. Would you like to enable it?")
                 .setPositiveButton("Yes") { _, _ ->
-                    val intent = Intent(android.provider.Settings.ACTION_WIFI_SETTINGS)
-                    context.startActivity(intent)
+                    startActivity( Intent(Settings.ACTION_WIFI_SETTINGS));
                 }
                 .setNegativeButton("No") { dialog, _ ->
                     dialog.dismiss()
