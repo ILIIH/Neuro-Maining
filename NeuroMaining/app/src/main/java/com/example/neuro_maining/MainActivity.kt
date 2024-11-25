@@ -7,6 +7,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.content.pm.PackageManager
+import android.location.LocationManager
 import android.net.ConnectivityManager
 import android.net.wifi.WifiManager
 import android.net.wifi.p2p.WifiP2pManager
@@ -49,7 +50,7 @@ class MainActivity : ComponentActivity() {
 
     override fun onResume() {
         super.onResume()
-        promptEnableWifi(this)
+        promptEnableWifiGPS(this)
     }
 
     private fun checkAndRequestPermission() {
@@ -70,14 +71,29 @@ class MainActivity : ComponentActivity() {
         }
     }
 
-    private fun promptEnableWifi(context: Context) {
+    private fun promptEnableWifiGPS(context: Context) {
         val wifiManager = context.getSystemService(Context.WIFI_SERVICE) as WifiManager
+        val locationManager = context.getSystemService(Context.LOCATION_SERVICE) as LocationManager
+
         if (!wifiManager.isWifiEnabled) {
             AlertDialog.Builder(context)
                 .setTitle("Enable WiFi")
                 .setMessage("This application requires WiFi to be enabled. Would you like to enable it?")
                 .setPositiveButton("Yes") { _, _ ->
                     startActivity( Intent(Settings.ACTION_WIFI_SETTINGS));
+                }
+                .setNegativeButton("No") { dialog, _ ->
+                    dialog.dismiss()
+                }
+                .show()
+        }
+
+        if (!locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+            AlertDialog.Builder(context)
+                .setTitle("Enable Location")
+                .setMessage("This application requires location services to be enabled for Wi-Fi Direct. Would you like to enable it?")
+                .setPositiveButton("Yes") { _, _ ->
+                    startActivity(Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS))
                 }
                 .setNegativeButton("No") { dialog, _ ->
                     dialog.dismiss()

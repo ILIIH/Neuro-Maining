@@ -55,6 +55,14 @@
             </intent-filter>
         </receiver>
 
+        <receiver android:name=".broadcast_receivers.GpsReceiver"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="android.location.PROVIDERS_CHANGED" />
+            </intent-filter>
+        </receiver>
+
+
         <receiver
             android:name=".broadcast_receivers.LowBatteryReceiver"
             android:exported="false">
