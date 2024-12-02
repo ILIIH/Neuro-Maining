@@ -31,6 +31,13 @@ import com.example.neuro_maining.ui.theme.NeuroMainingTheme
 
 
 class MainActivity : ComponentActivity() {
+
+    companion object {
+        init {
+            System.loadLibrary("neuro_maining")
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         startService(context = applicationContext)
@@ -42,7 +49,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    Greeting("Hello =)")
+                    Greeting(Init_cpp_file())
                 }
             }
         }
@@ -136,6 +143,10 @@ class MainActivity : ComponentActivity() {
         }
         registerReceiver(receiver, intentFilter)
     }
+
+    // native methods
+    external fun Init_cpp_file(): String
+
 }
 
 @Composable
