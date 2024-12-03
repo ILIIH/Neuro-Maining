@@ -1,7 +1,12 @@
 [
 {
   "directory": "/Users/illiabranchuk/AndroidStudioProjects/NeuronMining/NeuroMaining/app/.cxx/Debug/1s4t3u16/arm64-v8a",
-  "command": "/Users/illiabranchuk/Library/Android/sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/darwin-x86_64/bin/clang++ --target=aarch64-none-linux-android24 --sysroot=/Users/illiabranchuk/Library/Android/sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/darwin-x86_64/sysroot -Dneuro_maining_EXPORTS -std=c++17 -g  -fno-limit-debug-info -fPIC -o CMakeFiles/neuro_maining.dir/neuro_maining.cpp.o -c /Users/illiabranchuk/AndroidStudioProjects/NeuronMining/NeuroMaining/app/src/main/cpp/neuro_maining.cpp",
+  "command": "/Users/illiabranchuk/Library/Android/sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/darwin-x86_64/bin/clang++ --target=aarch64-none-linux-android24 --sysroot=/Users/illiabranchuk/Library/Android/sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/darwin-x86_64/sysroot -Dneuro_maining_EXPORTS -std=c++17 -g  -fno-limit-debug-info -fPIC -std=c++11 -o CMakeFiles/neuro_maining.dir/neuro_maining.cpp.o -c /Users/illiabranchuk/AndroidStudioProjects/NeuronMining/NeuroMaining/app/src/main/cpp/neuro_maining.cpp",
   "file": "/Users/illiabranchuk/AndroidStudioProjects/NeuronMining/NeuroMaining/app/src/main/cpp/neuro_maining.cpp"
+},
+{
+  "directory": "/Users/illiabranchuk/AndroidStudioProjects/NeuronMining/NeuroMaining/app/.cxx/Debug/1s4t3u16/arm64-v8a",
+  "command": "/Users/illiabranchuk/Library/Android/sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/darwin-x86_64/bin/clang++ --target=aarch64-none-linux-android24 --sysroot=/Users/illiabranchuk/Library/Android/sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/darwin-x86_64/sysroot -Dneuro_maining_EXPORTS -std=c++17 -g  -fno-limit-debug-info -fPIC -std=c++11 -o CMakeFiles/neuro_maining.dir/Neuron.cpp.o -c /Users/illiabranchuk/AndroidStudioProjects/NeuronMining/NeuroMaining/app/src/main/cpp/Neuron.cpp",
+  "file": "/Users/illiabranchuk/AndroidStudioProjects/NeuronMining/NeuroMaining/app/src/main/cpp/Neuron.cpp"
 }
 ]

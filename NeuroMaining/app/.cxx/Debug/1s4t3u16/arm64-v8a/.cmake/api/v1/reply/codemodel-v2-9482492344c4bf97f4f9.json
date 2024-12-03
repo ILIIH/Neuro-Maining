@@ -39,7 +39,7 @@
 				{
 					"directoryIndex" : 0,
 					"id" : "neuro_maining::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-neuro_maining-Debug-da4173d9db20c76edd24.json",
+					"jsonFile" : "target-neuro_maining-Debug-b3f9ca677d1ceae6b542.json",
 					"name" : "neuro_maining",
 					"projectIndex" : 0
 				}
@@ -49,7 +49,7 @@
 	"kind" : "codemodel",
 	"paths" : 
 	{
-		"build" : "/Users/illiabranchuk/AndroidStudioProjects/NeuronMining/NeuroMaining/app/.cxx/Debug/1s4t3u16/x86",
+		"build" : "/Users/illiabranchuk/AndroidStudioProjects/NeuronMining/NeuroMaining/app/.cxx/Debug/1s4t3u16/arm64-v8a",
 		"source" : "/Users/illiabranchuk/AndroidStudioProjects/NeuronMining/NeuroMaining/app/src/main/cpp"
 	},
 	"version" : 

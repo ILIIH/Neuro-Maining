@@ -52,7 +52,16 @@ build cmake_object_order_depends_target_neuro_maining: phony || CMakeFiles/neuro
 build CMakeFiles/neuro_maining.dir/neuro_maining.cpp.o: CXX_COMPILER__neuro_maining_Debug /Users/illiabranchuk/AndroidStudioProjects/NeuronMining/NeuroMaining/app/src/main/cpp/neuro_maining.cpp || cmake_object_order_depends_target_neuro_maining
   DEFINES = -Dneuro_maining_EXPORTS
   DEP_FILE = CMakeFiles/neuro_maining.dir/neuro_maining.cpp.o.d
-  FLAGS = -std=c++17 -g  -fno-limit-debug-info -fPIC
+  FLAGS = -std=c++17 -g  -fno-limit-debug-info -fPIC -std=c++11
+  OBJECT_DIR = CMakeFiles/neuro_maining.dir
+  OBJECT_FILE_DIR = CMakeFiles/neuro_maining.dir
+  TARGET_COMPILE_PDB = CMakeFiles/neuro_maining.dir/
+  TARGET_PDB = /Users/illiabranchuk/AndroidStudioProjects/NeuronMining/NeuroMaining/app/build/intermediates/cxx/Debug/1s4t3u16/obj/x86/libneuro_maining.pdb
+
+build CMakeFiles/neuro_maining.dir/Neuron.cpp.o: CXX_COMPILER__neuro_maining_Debug /Users/illiabranchuk/AndroidStudioProjects/NeuronMining/NeuroMaining/app/src/main/cpp/Neuron.cpp || cmake_object_order_depends_target_neuro_maining
+  DEFINES = -Dneuro_maining_EXPORTS
+  DEP_FILE = CMakeFiles/neuro_maining.dir/Neuron.cpp.o.d
+  FLAGS = -std=c++17 -g  -fno-limit-debug-info -fPIC -std=c++11
   OBJECT_DIR = CMakeFiles/neuro_maining.dir
   OBJECT_FILE_DIR = CMakeFiles/neuro_maining.dir
   TARGET_COMPILE_PDB = CMakeFiles/neuro_maining.dir/
@@ -66,7 +75,7 @@ build CMakeFiles/neuro_maining.dir/neuro_maining.cpp.o: CXX_COMPILER__neuro_main
 #############################################
 # Link the shared library /Users/illiabranchuk/AndroidStudioProjects/NeuronMining/NeuroMaining/app/build/intermediates/cxx/Debug/1s4t3u16/obj/x86/libneuro_maining.so
 
-build /Users/illiabranchuk/AndroidStudioProjects/NeuronMining/NeuroMaining/app/build/intermediates/cxx/Debug/1s4t3u16/obj/x86/libneuro_maining.so: CXX_SHARED_LIBRARY_LINKER__neuro_maining_Debug CMakeFiles/neuro_maining.dir/neuro_maining.cpp.o
+build /Users/illiabranchuk/AndroidStudioProjects/NeuronMining/NeuroMaining/app/build/intermediates/cxx/Debug/1s4t3u16/obj/x86/libneuro_maining.so: CXX_SHARED_LIBRARY_LINKER__neuro_maining_Debug CMakeFiles/neuro_maining.dir/neuro_maining.cpp.o CMakeFiles/neuro_maining.dir/Neuron.cpp.o
   LANGUAGE_COMPILE_FLAGS = -std=c++17 -g  -fno-limit-debug-info
   LINK_FLAGS = -Wl,--build-id=sha1 -Wl,--no-rosegment -Wl,--fatal-warnings -Qunused-arguments -Wl,--no-undefined
   LINK_LIBRARIES = -landroid  -llog   -static-libstdc++ -latomic -lm
