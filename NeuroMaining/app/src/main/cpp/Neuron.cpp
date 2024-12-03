@@ -27,10 +27,22 @@ double Neuron::feedForward(const std::vector<double>& inputs) {
     return output;
 }
 
-double Neuron::getOutput() const {
-    return output;
+void Neuron::backpropagate(const std::vector<double>& inputs, double target, double learningRate) {
+
+    double error = target - output;
+    double derivative = output * (1.0 - output);
+    double delta = error * derivative;
+
+    for (size_t i = 0; i < weights.size(); ++i) {
+        weights[i] += learningRate * delta * inputs[i];
+    }
+
+    bias += learningRate * delta;
+
+    LOGI("Weights updated");
+    for (size_t i = 0; i < weights.size(); ++i) {
+        LOGI("Weight[%zu]: %f", i, weights[i]);
+    }
+    LOGI("Bias updated: %f", bias);
 }
 
-void Neuron::logOutput() const {
-    LOGI("Neuron output: %f", output);
-}

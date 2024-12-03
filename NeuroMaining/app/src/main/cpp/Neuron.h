@@ -8,8 +8,7 @@ class Neuron {
 public:
     Neuron(int numInputs);
     double feedForward(const std::vector<double>& inputs);
-    double getOutput() const;
-    void logOutput() const;
+    void backpropagate(const std::vector<double>& inputs, double target, double learningRate);
 
 private:
     std::vector<double> weights;
