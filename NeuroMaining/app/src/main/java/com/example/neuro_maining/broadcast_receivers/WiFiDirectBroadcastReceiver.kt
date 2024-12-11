@@ -6,6 +6,8 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.NetworkInfo
+import android.net.wifi.WpsInfo
+import android.net.wifi.p2p.WifiP2pConfig
 import android.net.wifi.p2p.WifiP2pDevice
 import android.net.wifi.p2p.WifiP2pManager
 import android.os.Build
@@ -53,6 +55,19 @@ class WiFiDirectBroadcastReceiver(
                         Log.d("WiFiDirect", "No peers found")
                     } else {
                         peers.forEach { device ->
+                            val currentDeviceCof = WifiP2pConfig().apply {
+                                deviceAddress = device.deviceAddress
+                                wps.setup = WpsInfo.PBC
+                            }
+                            manager.connect(channel,currentDeviceCof, object : WifiP2pManager.ActionListener {
+                                override fun onSuccess() {
+                                    Log.d("WiFiDirect", "Connection initiated with ${device.deviceName}")
+                                }
+
+                                override fun onFailure(reason: Int) {
+                                    Log.d("WiFiDirect", "Connection failed: $reason")
+                                }
+                            })
                             Log.d("WiFiDirect", "Peer: ${device.deviceName}")
                         }
                     }
