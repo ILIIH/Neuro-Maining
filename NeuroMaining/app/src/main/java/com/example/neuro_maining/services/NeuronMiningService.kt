@@ -24,6 +24,8 @@ class NeuronMiningService : Service() {
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
+        setUpClientSocket()
+        setUpServerSocket()
         return START_STICKY
     }
 
