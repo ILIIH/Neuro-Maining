@@ -34,15 +34,34 @@ fun PlotView(points: List<Pair<Float, Float>>) {
 
             val currentHour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY)
             val hours = (0..currentHour).toList()
-            val hourSpacing = canvasWidth / hours.size - PLOT_MARGIN/hours.size
+            val hourSpacing = canvasWidth / hours.size - PLOT_MARGIN/(hours.size+1)
 
             val axesPath = Path().apply {
                 moveTo(PLOT_MARGIN, canvasHeight)
-                lineTo(canvasWidth-PLOT_MARGIN, canvasHeight)
+                lineTo(canvasWidth, canvasHeight)
 
                 moveTo(originX + PLOT_MARGIN, PLOT_MARGIN)
                 lineTo(originX + PLOT_MARGIN, canvasHeight)
             }
+
+            val axesArrowPath = Path().apply {
+                moveTo(PLOT_MARGIN, PLOT_MARGIN)
+                lineTo(PLOT_MARGIN/2, 2*PLOT_MARGIN)
+                moveTo(PLOT_MARGIN, PLOT_MARGIN)
+                lineTo(PLOT_MARGIN+ PLOT_MARGIN/2, 2*PLOT_MARGIN)
+
+                moveTo(canvasWidth, canvasHeight)
+                lineTo(canvasWidth-PLOT_MARGIN, canvasHeight - PLOT_MARGIN/2)
+                moveTo(canvasWidth, canvasHeight)
+                lineTo(canvasWidth-PLOT_MARGIN, canvasHeight + PLOT_MARGIN/2)
+
+            }
+
+            drawPath(
+                path = axesArrowPath,
+                color = Color.Black,
+                style = Stroke(width = 2f)
+            )
 
             drawPath(
                 path = axesPath,
