@@ -27,6 +27,7 @@ import androidx.core.app.ActivityCompat
 import com.example.neuro_maining.broadcast_receivers.InternetConnectivityReceiver
 import com.example.neuro_maining.broadcast_receivers.WiFiDirectBroadcastReceiver
 import com.example.neuro_maining.services.NeuronMiningService
+import com.example.neuro_maining.ui.custom_view.PlotView
 import com.example.neuro_maining.ui.theme.NeuroMainingTheme
 
 
@@ -43,13 +44,19 @@ class MainActivity : ComponentActivity() {
         startService(context = applicationContext)
         registerBroadcastsReceivers(context = applicationContext)
         checkAndRequestPermission()
+        val points = listOf(
+            50f to 200f,
+            100f to 150f,
+            150f to 100f,
+            200f to 50f
+        )
         setContent {
             NeuroMainingTheme {
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    Greeting(Init_cpp_file())
+                    PlotView(points)
                 }
             }
         }

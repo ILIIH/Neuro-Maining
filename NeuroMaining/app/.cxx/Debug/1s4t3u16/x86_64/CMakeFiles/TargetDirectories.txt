@@ -1,0 +1,3 @@
+/Users/illiabranchuk/AndroidStudioProjects/NeuronMining/NeuroMaining/app/.cxx/Debug/1s4t3u16/x86_64/CMakeFiles/neuro_maining.dir
+/Users/illiabranchuk/AndroidStudioProjects/NeuronMining/NeuroMaining/app/.cxx/Debug/1s4t3u16/x86_64/CMakeFiles/edit_cache.dir
+/Users/illiabranchuk/AndroidStudioProjects/NeuronMining/NeuroMaining/app/.cxx/Debug/1s4t3u16/x86_64/CMakeFiles/rebuild_cache.dir

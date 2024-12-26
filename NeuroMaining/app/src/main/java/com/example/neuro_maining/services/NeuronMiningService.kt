@@ -6,6 +6,7 @@ import android.app.NotificationManager
 import android.app.Service
 import android.content.Intent
 import android.os.IBinder
+import android.widget.Toast
 import androidx.core.app.NotificationCompat
 import com.example.neuro_maining.R
 import java.io.BufferedReader
@@ -25,7 +26,7 @@ class NeuronMiningService : Service() {
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         setUpClientSocket()
-        setUpServerSocket()
+        //setUpServerSocket()
         return START_STICKY
     }
 
@@ -60,7 +61,7 @@ class NeuronMiningService : Service() {
                 val reader =
                     BufferedReader(InputStreamReader(inputStream))
                 val message = reader.readLine() // Example: reading a string
-                println("Received: $message")
+                Toast.makeText(applicationContext, "Received: $message", Toast.LENGTH_SHORT).show()
 
                 // Close connections
                 reader.close()
