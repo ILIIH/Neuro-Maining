@@ -105,7 +105,7 @@ fun PlotView(points: List<Pair<Float, Float>>) {
                 drawContext.canvas.nativeCanvas.drawCircle(
                     x + PLOT_MARGIN,
                     canvasHeight,
-                    10f,
+                    6f,
                     paint
                 )
             }
