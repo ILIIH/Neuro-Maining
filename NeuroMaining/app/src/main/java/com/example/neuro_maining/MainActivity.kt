@@ -45,10 +45,10 @@ class MainActivity : ComponentActivity() {
         registerBroadcastsReceivers(context = applicationContext)
         checkAndRequestPermission()
         val points = listOf(
-            50f to 200f,
-            100f to 150f,
-            150f to 100f,
-            200f to 50f
+            0 to 200f,
+            1 to 150f,
+            14 to 100f,
+            19 to 50f
         )
         setContent {
             NeuroMainingTheme {
