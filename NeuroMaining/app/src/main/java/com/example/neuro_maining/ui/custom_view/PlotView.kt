@@ -40,11 +40,9 @@ fun PlotView(points: List<Pair<Int, Float>>) {
     }
 
     fun configurePaths(canvasWidth: Float, canvasHeight: Float) {
-        // Clear previous paths before configuring new ones
         axesPath.reset()
         axesArrowPath.reset()
 
-        // Axis path: X-axis and Y-axis lines
         axesPath.apply {
             moveTo(PLOT_MARGIN, canvasHeight)
             lineTo(canvasWidth/PLOT_WITH_FACTOR, canvasHeight)
@@ -53,19 +51,16 @@ fun PlotView(points: List<Pair<Int, Float>>) {
             lineTo(PLOT_MARGIN, canvasHeight)
         }
 
-        // Arrow path for axis markers
         axesArrowPath.apply {
-            // Arrow for Y-axis
             moveTo(PLOT_MARGIN, PLOT_MARGIN)
-            lineTo(PLOT_MARGIN / 2, 2 * PLOT_MARGIN)
+            lineTo(PLOT_MARGIN / 2, 1.4f * PLOT_MARGIN)
             moveTo(PLOT_MARGIN, PLOT_MARGIN)
-            lineTo(PLOT_MARGIN + PLOT_MARGIN / 2, 2 * PLOT_MARGIN)
+            lineTo(PLOT_MARGIN + PLOT_MARGIN / 2, 1.4f * PLOT_MARGIN)
 
-            // Arrow for X-axis
-            moveTo(canvasWidth, canvasHeight)
-            lineTo(canvasWidth - PLOT_MARGIN, canvasHeight - PLOT_MARGIN / 2)
-            moveTo(canvasWidth, canvasHeight)
-            lineTo(canvasWidth - PLOT_MARGIN, canvasHeight + PLOT_MARGIN / 2)
+            moveTo(canvasWidth/PLOT_WITH_FACTOR, canvasHeight)
+            lineTo(canvasWidth/PLOT_WITH_FACTOR - PLOT_MARGIN/2, canvasHeight - PLOT_MARGIN / 2)
+            moveTo(canvasWidth/PLOT_WITH_FACTOR, canvasHeight)
+            lineTo(canvasWidth/PLOT_WITH_FACTOR - PLOT_MARGIN/2, canvasHeight + PLOT_MARGIN / 2)
         }
     }
 
