@@ -17,12 +17,14 @@ import android.provider.Settings
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import androidx.core.app.ActivityCompat
 import com.example.neuro_maining.broadcast_receivers.InternetConnectivityReceiver
 import com.example.neuro_maining.broadcast_receivers.WiFiDirectBroadcastReceiver
@@ -44,19 +46,27 @@ class MainActivity : ComponentActivity() {
         startService(context = applicationContext)
         registerBroadcastsReceivers(context = applicationContext)
         checkAndRequestPermission()
-        val points = listOf(
-            0 to 200f,
+        val points = listOf(listOf(
+            3 to 200f,
             1 to 150f,
             14 to 100f,
             19 to 50f
-        )
+        ),
+            listOf(
+                3 to 220f,
+                1 to 120f,
+                19 to 0f
+            ))
         setContent {
             NeuroMainingTheme {
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    PlotView(points)
+                    PlotView(
+                        points,
+                        modifier = Modifier.padding(top = 30.dp)
+                    )
                 }
             }
         }

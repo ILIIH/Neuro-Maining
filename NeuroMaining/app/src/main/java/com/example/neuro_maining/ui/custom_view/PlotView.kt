@@ -16,17 +16,17 @@ import androidx.compose.ui.graphics.drawscope.DrawContext
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.graphics.nativeCanvas
 import java.util.Calendar
+import kotlin.random.Random
 
 const val PLOT_MARGIN = 50f
 const val AXIS_FONT_SIZE = 30f
-const val PLOT_WITH_FACTOR = 1.1f
+const val PLOT_WIDTH_FACTOR = 1.1f
 
 @Composable
-fun PlotView(points: List<Pair<Int, Float>>) {
+fun PlotView(points:List<List<Pair<Int, Float>>>, modifier: Modifier = Modifier) {
 
     val axesPath = remember { Path() }
     val axesArrowPath = remember { Path() }
-    val earningPath = remember { Path() }
 
     val textPaint = remember{Paint().apply {
         color = android.graphics.Color.BLACK
@@ -45,32 +45,70 @@ fun PlotView(points: List<Pair<Int, Float>>) {
 
         axesPath.apply {
             moveTo(PLOT_MARGIN, canvasHeight)
-            lineTo(canvasWidth/PLOT_WITH_FACTOR, canvasHeight)
+            lineTo(canvasWidth/PLOT_WIDTH_FACTOR, canvasHeight)
 
-            moveTo(PLOT_MARGIN, PLOT_MARGIN)
+            moveTo(PLOT_MARGIN, 0f)
             lineTo(PLOT_MARGIN, canvasHeight)
         }
 
         axesArrowPath.apply {
-            moveTo(PLOT_MARGIN, PLOT_MARGIN)
-            lineTo(PLOT_MARGIN / 2, 1.4f * PLOT_MARGIN)
-            moveTo(PLOT_MARGIN, PLOT_MARGIN)
-            lineTo(PLOT_MARGIN + PLOT_MARGIN / 2, 1.4f * PLOT_MARGIN)
+            moveTo(PLOT_MARGIN, 0f)
+            lineTo(PLOT_MARGIN / 2,  PLOT_MARGIN)
+            moveTo(PLOT_MARGIN, 0f)
+            lineTo(PLOT_MARGIN + PLOT_MARGIN / 2,   PLOT_MARGIN)
 
-            moveTo(canvasWidth/PLOT_WITH_FACTOR, canvasHeight)
-            lineTo(canvasWidth/PLOT_WITH_FACTOR - PLOT_MARGIN/2, canvasHeight - PLOT_MARGIN / 2)
-            moveTo(canvasWidth/PLOT_WITH_FACTOR, canvasHeight)
-            lineTo(canvasWidth/PLOT_WITH_FACTOR - PLOT_MARGIN/2, canvasHeight + PLOT_MARGIN / 2)
+            moveTo(canvasWidth/PLOT_WIDTH_FACTOR, canvasHeight)
+            lineTo(canvasWidth/PLOT_WIDTH_FACTOR - PLOT_MARGIN/2, canvasHeight - PLOT_MARGIN / 2)
+            moveTo(canvasWidth/PLOT_WIDTH_FACTOR, canvasHeight)
+            lineTo(canvasWidth/PLOT_WIDTH_FACTOR - PLOT_MARGIN/2, canvasHeight + PLOT_MARGIN / 2)
         }
     }
 
     fun drawPoints(canvasHeight: Float, canvasWidth: Float, drawContext:DrawContext){
         val currentHour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY)
         val hours = (0..currentHour).toList()
-        val hourSpacing = (canvasWidth / hours.size - PLOT_MARGIN / (hours.size + 1))/PLOT_WITH_FACTOR
+        val hourSpacing = (canvasWidth / hours.size - PLOT_MARGIN / (hours.size + 1))/PLOT_WIDTH_FACTOR
 
-        earningPath.moveTo(PLOT_MARGIN, canvasHeight)
-        val maxValue = points.maxBy { it.second}
+        var maxValue = 0f
+        for(poinsPool in points){
+            val currentMax = poinsPool.maxBy { it.second}.second
+            maxValue = if(currentMax > maxValue ) currentMax+PLOT_MARGIN else maxValue
+        }
+
+        for(poinsPool in points){
+            val earningPath = Path()
+            earningPath.moveTo(PLOT_MARGIN, canvasHeight)
+
+            hours.forEachIndexed { index, hour ->
+                val x = hourSpacing * index
+                val n = poinsPool.find { it.first == index}
+                if(n!=null){
+                    val y = (  canvasHeight * n.second - canvasHeight) / maxValue
+                    earningPath.apply {
+                        lineTo(x+ PLOT_MARGIN, y)
+                        drawContext.canvas.nativeCanvas.drawCircle(
+                            x + PLOT_MARGIN,
+                            y,
+                            14f,
+                            paint
+                        )
+                    }
+                }
+            }
+            drawContext.canvas.drawPath(
+                path = earningPath,
+                androidx.compose.ui.graphics.Paint().apply {
+                    color = Color(
+                        red = Random.nextFloat(),
+                        green = Random.nextFloat(),
+                        blue = Random.nextFloat(),
+                        alpha = 1.0f
+                    )
+                    strokeWidth = 10.0f
+                    style = PaintingStyle.Stroke
+                }
+            )
+        }
 
         hours.forEachIndexed { index, hour ->
             val x = hourSpacing * index
@@ -87,33 +125,9 @@ fun PlotView(points: List<Pair<Int, Float>>) {
                 6f,
                 paint
             )
-            val n = points.find { it.first == index}
-            if(n!=null){
-                val y = (  canvasHeight * n.second - canvasHeight) / maxValue.second
-                earningPath.apply {
-                    lineTo(x+ PLOT_MARGIN, y)
-                    drawContext.canvas.nativeCanvas.drawCircle(
-                        x + PLOT_MARGIN,
-                        y,
-                        14f,
-                        paint
-                    )
-                }
-            }
-
         }
-
-        drawContext.canvas.drawPath(
-            path = earningPath,
-            androidx.compose.ui.graphics.Paint().apply {
-                color = Color.Black
-                strokeWidth = 10.0f
-                style = PaintingStyle.Stroke
-            }
-        )
-
     }
-    Box(modifier = Modifier.fillMaxSize()) {
+    Box(modifier = modifier.fillMaxSize()) {
         Canvas(modifier = Modifier.fillMaxHeight(0.3f).fillMaxWidth(1f)) {
             configurePaths(size.width, size.height)
 
