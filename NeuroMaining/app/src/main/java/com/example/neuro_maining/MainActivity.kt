@@ -23,6 +23,7 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.core.app.ActivityCompat
@@ -51,12 +52,12 @@ class MainActivity : ComponentActivity() {
             1 to 150f,
             14 to 100f,
             19 to 50f
-        ),
+        ) to Color.Green,
             listOf(
                 3 to 220f,
                 1 to 120f,
                 19 to 0f
-            ))
+            ) to Color.Magenta)
         setContent {
             NeuroMainingTheme {
                 Surface(
