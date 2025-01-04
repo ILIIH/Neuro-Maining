@@ -33,6 +33,17 @@ import com.example.neuro_maining.services.NeuronMiningService
 import com.example.neuro_maining.ui.custom_view.PlotView
 import com.example.neuro_maining.ui.theme.NeuroMainingTheme
 
+val points = listOf(listOf(
+    3 to 200f,
+    1 to 150f,
+    14 to 100f,
+    19 to 50f
+) to Color.Green,
+    listOf(
+        3 to 220f,
+        1 to 120f,
+        19 to 0f
+    ) to Color.Magenta)
 
 class MainActivity : ComponentActivity() {
 
@@ -47,17 +58,7 @@ class MainActivity : ComponentActivity() {
         startService(context = applicationContext)
         registerBroadcastsReceivers(context = applicationContext)
         checkAndRequestPermission()
-        val points = listOf(listOf(
-            3 to 200f,
-            1 to 150f,
-            14 to 100f,
-            19 to 50f
-        ) to Color.Green,
-            listOf(
-                3 to 220f,
-                1 to 120f,
-                19 to 0f
-            ) to Color.Magenta)
+
         setContent {
             NeuroMainingTheme {
                 Surface(
