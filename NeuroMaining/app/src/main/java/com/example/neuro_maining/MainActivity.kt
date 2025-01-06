@@ -17,6 +17,7 @@ import android.provider.Settings
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -30,6 +31,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -68,7 +70,7 @@ val miningHistory = listOf(
             19 to 50f
         ),
         color = Color.Blue,
-        miningSource = "H3 bb"
+        miningSource = "Hol wog"
     )
 )
 
@@ -103,6 +105,7 @@ class MainActivity : ComponentActivity() {
                         ListOfEarnings(
                             modifier = Modifier
                                 .fillMaxWidth()
+                                .padding(top = 300.dp)
                         )
                     }
                 }
@@ -119,9 +122,7 @@ class MainActivity : ComponentActivity() {
             items(
                 count = miningHistory.size,
                 itemContent = { index ->
-                    Column {
-                        ListItem(miningHistory[index])
-                    }
+                    ListItem(miningHistory[index])
                 }
             )
         }
@@ -132,29 +133,33 @@ class MainActivity : ComponentActivity() {
         Card(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(40.dp),
-            elevation = CardDefaults.cardElevation(4.dp)
+                .height(80.dp)
+                .border(
+                    width = 1.dp,
+                    color = Color.Black,
+                    shape = RoundedCornerShape(12.dp)
+                ),
+            colors = CardDefaults.cardColors(containerColor = Color.Transparent) // No background color
         ) {
             Row(
                 modifier = Modifier.fillMaxSize(),
-                verticalAlignment = Alignment.CenterVertically,
-
+                horizontalArrangement = Arrangement.Center,
+                verticalAlignment = Alignment.CenterVertically
             ) {
-                Spacer(modifier = Modifier.width(12.dp))
                 Text(
-                    text = "${item.miningSource}",
-                    style = MaterialTheme.typography.bodySmall
+                    text = item.miningSource,
+                    style = MaterialTheme.typography.bodyLarge
                 )
-                Spacer(modifier = Modifier.width(12.dp))
+                Spacer(modifier = Modifier.width(40.dp))
                 Text(
                     text = "2.0033 $",
-                    style = MaterialTheme.typography.bodySmall
+                    style = MaterialTheme.typography.bodyLarge
                 )
-                Spacer(modifier = Modifier.width(12.dp))
+                Spacer(modifier = Modifier.width(40.dp))
                 Box(
                     modifier = Modifier
-                        .size(20.dp)
-                        .background(item.color)
+                        .size(40.dp)
+                        .background(item.color, shape = RoundedCornerShape(8.dp))
                 )
             }
         }
