@@ -16,8 +16,20 @@ import android.os.Bundle
 import android.provider.Settings
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -32,18 +44,33 @@ import com.example.neuro_maining.broadcast_receivers.WiFiDirectBroadcastReceiver
 import com.example.neuro_maining.services.NeuronMiningService
 import com.example.neuro_maining.ui.custom_view.PlotView
 import com.example.neuro_maining.ui.theme.NeuroMainingTheme
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
+import androidx.compose.ui.Alignment
+import com.example.neuro_maining.data.MiningHistory
 
-val points = listOf(listOf(
-    3 to 200f,
-    1 to 150f,
-    14 to 100f,
-    19 to 50f
-) to Color.Green,
-    listOf(
-        3 to 220f,
-        1 to 120f,
-        19 to 0f
-    ) to Color.Magenta)
+val miningHistory = listOf(
+    MiningHistory(
+        miningResults = listOf(
+            3 to 200f,
+            1 to 150f,
+            14 to 100f,
+            19 to 50f
+        ),
+        color = Color.Green,
+        miningSource = "Intel"
+    ),
+    MiningHistory(
+        miningResults = listOf(
+            3 to 200f,
+            1 to 150f,
+            14 to 100f,
+            19 to 50f
+        ),
+        color = Color.Blue,
+        miningSource = "H3 bb"
+    )
+)
 
 class MainActivity : ComponentActivity() {
 
@@ -65,11 +92,70 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    PlotView(
-                        points,
-                        modifier = Modifier.padding(top = 30.dp)
-                    )
+                    Box(modifier = Modifier.fillMaxSize()) {
+                        PlotView(
+                            miningHistory,
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(top = 30.dp)
+                        )
+
+                        ListOfEarnings(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                        )
+                    }
                 }
+            }
+        }
+    }
+    @Composable
+    fun ListOfEarnings(modifier: Modifier) {
+        LazyColumn(
+            modifier = modifier,
+            contentPadding = PaddingValues(8.dp),
+            verticalArrangement = Arrangement.spacedBy(14.dp)
+        ) {
+            items(
+                count = miningHistory.size,
+                itemContent = { index ->
+                    Column {
+                        ListItem(miningHistory[index])
+                    }
+                }
+            )
+        }
+    }
+
+    @Composable
+    fun ListItem(item: MiningHistory) {
+        Card(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(40.dp),
+            elevation = CardDefaults.cardElevation(4.dp)
+        ) {
+            Row(
+                modifier = Modifier.fillMaxSize(),
+                verticalAlignment = Alignment.CenterVertically,
+
+            ) {
+                Spacer(modifier = Modifier.width(12.dp))
+                Text(
+                    text = "${item.miningSource}",
+                    style = MaterialTheme.typography.bodySmall
+                )
+                Spacer(modifier = Modifier.width(12.dp))
+                Text(
+                    text = "2.0033 $",
+                    style = MaterialTheme.typography.bodySmall
+                )
+                Spacer(modifier = Modifier.width(12.dp))
+                Box(
+                    modifier = Modifier
+                        .size(20.dp)
+                        .background(item.color)
+                )
             }
         }
     }

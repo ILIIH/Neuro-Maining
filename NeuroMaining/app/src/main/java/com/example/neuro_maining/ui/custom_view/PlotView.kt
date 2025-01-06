@@ -15,6 +15,7 @@ import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.graphics.drawscope.DrawContext
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.graphics.nativeCanvas
+import com.example.neuro_maining.data.MiningHistory
 import java.util.Calendar
 import kotlin.random.Random
 
@@ -23,7 +24,7 @@ const val AXIS_FONT_SIZE = 30f
 const val PLOT_WIDTH_FACTOR = 1.1f
 
 @Composable
-fun PlotView(points:List<Pair<List<Pair<Int, Float>>,Color>>, modifier: Modifier = Modifier) {
+fun PlotView(points:List<MiningHistory>, modifier: Modifier = Modifier) {
 
     val axesPath = remember { Path() }
     val axesArrowPath = remember { Path() }
@@ -71,7 +72,7 @@ fun PlotView(points:List<Pair<List<Pair<Int, Float>>,Color>>, modifier: Modifier
 
         var maxValue = 0f
         for(poinsPool in points){
-            val currentMax = poinsPool.first.maxBy { it.second}.second
+            val currentMax = poinsPool.miningResults.maxBy { it.second}.second
             maxValue = if(currentMax > maxValue ) currentMax+PLOT_MARGIN else maxValue
         }
 
@@ -81,7 +82,7 @@ fun PlotView(points:List<Pair<List<Pair<Int, Float>>,Color>>, modifier: Modifier
 
             hours.forEachIndexed { index, hour ->
                 val x = hourSpacing * index
-                val n = poinsPool.first.find { it.first == index}
+                val n = poinsPool.miningResults.find { it.first == index}
                 if(n!=null){
                     val y = (  canvasHeight * n.second - canvasHeight) / maxValue
                     earningPath.apply {
@@ -98,7 +99,7 @@ fun PlotView(points:List<Pair<List<Pair<Int, Float>>,Color>>, modifier: Modifier
             drawContext.canvas.drawPath(
                 path = earningPath,
                 androidx.compose.ui.graphics.Paint().apply {
-                    color = poinsPool.second
+                    color = poinsPool.color
                     strokeWidth = 10.0f
                     style = PaintingStyle.Stroke
                 }
