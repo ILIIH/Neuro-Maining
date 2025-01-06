@@ -49,30 +49,34 @@ import com.example.neuro_maining.ui.theme.NeuroMainingTheme
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.text.font.FontWeight
 import com.example.neuro_maining.data.MiningHistory
+import com.example.neuro_maining.data.util.getEarningSum
 
 val miningHistory = listOf(
     MiningHistory(
         miningResults = listOf(
             3 to 200f,
-            1 to 150f,
-            14 to 100f,
-            19 to 50f
+            2 to 150f,
+            12 to 100f,
+            10 to 50f
         ),
         color = Color.Green,
         miningSource = "Intel"
     ),
     MiningHistory(
         miningResults = listOf(
-            3 to 200f,
-            1 to 150f,
+            3 to 230f,
+            1 to 15f,
             14 to 100f,
             19 to 50f
         ),
         color = Color.Blue,
-        miningSource = "Hol wog"
+        miningSource = "SAP"
     )
 )
+
+const val EARNING_MULTIPLIER = 0.3
 
 class MainActivity : ComponentActivity() {
 
@@ -117,7 +121,7 @@ class MainActivity : ComponentActivity() {
         LazyColumn(
             modifier = modifier,
             contentPadding = PaddingValues(8.dp),
-            verticalArrangement = Arrangement.spacedBy(14.dp)
+            verticalArrangement = Arrangement.spacedBy(24.dp)
         ) {
             items(
                 count = miningHistory.size,
@@ -135,11 +139,11 @@ class MainActivity : ComponentActivity() {
                 .fillMaxWidth()
                 .height(80.dp)
                 .border(
-                    width = 1.dp,
+                    width = 2.dp,
                     color = Color.Black,
                     shape = RoundedCornerShape(12.dp)
                 ),
-            colors = CardDefaults.cardColors(containerColor = Color.Transparent) // No background color
+            colors = CardDefaults.cardColors(containerColor = Color.Transparent) 
         ) {
             Row(
                 modifier = Modifier.fillMaxSize(),
@@ -148,18 +152,22 @@ class MainActivity : ComponentActivity() {
             ) {
                 Text(
                     text = item.miningSource,
-                    style = MaterialTheme.typography.bodyLarge
+                    style = MaterialTheme.typography.bodyLarge.copy(
+                        fontWeight = FontWeight.Bold
+                    )
                 )
                 Spacer(modifier = Modifier.width(40.dp))
                 Text(
-                    text = "2.0033 $",
-                    style = MaterialTheme.typography.bodyLarge
+                    text = "${item.getEarningSum()*EARNING_MULTIPLIER} $",
+                    style = MaterialTheme.typography.bodyLarge.copy(
+                        fontWeight = FontWeight.Bold
+                    )
                 )
                 Spacer(modifier = Modifier.width(40.dp))
                 Box(
                     modifier = Modifier
                         .size(40.dp)
-                        .background(item.color, shape = RoundedCornerShape(8.dp))
+                        .background(item.color.copy(alpha = 0.5f), shape = RoundedCornerShape(8.dp))
                 )
             }
         }

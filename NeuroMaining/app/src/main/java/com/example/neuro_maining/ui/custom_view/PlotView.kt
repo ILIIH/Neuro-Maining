@@ -99,7 +99,7 @@ fun PlotView(points:List<MiningHistory>, modifier: Modifier = Modifier) {
             drawContext.canvas.drawPath(
                 path = earningPath,
                 androidx.compose.ui.graphics.Paint().apply {
-                    color = poinsPool.color
+                    color = poinsPool.color.copy(alpha = 0.5f)
                     strokeWidth = 10.0f
                     style = PaintingStyle.Stroke
                 }
