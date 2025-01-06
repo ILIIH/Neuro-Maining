@@ -104,6 +104,7 @@ class MainActivity : ComponentActivity() {
                             modifier = Modifier
                                 .fillMaxWidth()
                                 .padding(top = 30.dp)
+                                .padding(horizontal = 10.dp)
                         )
 
                         ListOfEarnings(
