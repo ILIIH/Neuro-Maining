@@ -76,8 +76,6 @@ fun PlotView(points:List<MiningHistory>, modifier: Modifier = Modifier) {
             maxValue = if(currentMax > maxValue ) currentMax+PLOT_MARGIN else maxValue
         }
         var tempMaxValue = maxValue
-
-        // Earning measurements
         val earningStep = ((maxValue*100)/ canvasHeight).toInt()
 
         for (i in 0 until (canvasHeight - PLOT_MARGIN).toInt() step earningStep) {
@@ -87,7 +85,7 @@ fun PlotView(points:List<MiningHistory>, modifier: Modifier = Modifier) {
                 i  + PLOT_MARGIN,
                 textPaint
             )
-            tempMaxValue -=earningStep
+            tempMaxValue -=(earningStep/2.2f)
             drawContext.canvas.nativeCanvas.drawCircle(
                 PLOT_MARGIN,
                 i  + PLOT_MARGIN,
@@ -104,7 +102,7 @@ fun PlotView(points:List<MiningHistory>, modifier: Modifier = Modifier) {
                 val x = hourSpacing * index
                 val n = poinsPool.miningResults.find { it.first == index}
                 if(n!=null){
-                    val y = (  canvasHeight * n.second - canvasHeight) / maxValue
+                    val y = ( maxValue *PLOT_MARGIN)/canvasHeight+ canvasHeight -  (canvasHeight *  n.second )/maxValue
                     earningPath.apply {
                         lineTo(x+ PLOT_MARGIN, y)
                         drawContext.canvas.nativeCanvas.drawCircle(
