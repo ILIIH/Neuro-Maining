@@ -76,19 +76,19 @@ fun PlotView(points:List<MiningHistory>, modifier: Modifier = Modifier) {
             maxValue = if(currentMax > maxValue ) currentMax+PLOT_MARGIN else maxValue
         }
         var tempMaxValue = maxValue
-        val earningStep = ((maxValue*100)/ canvasHeight).toInt()
+        val earningStep = (((maxValue*100)/canvasHeight)).toInt()
 
-        for (i in 0 until (canvasHeight - PLOT_MARGIN).toInt() step earningStep) {
+        for (i in PLOT_MARGIN.toInt() until (canvasHeight).toInt() step earningStep) {
             drawContext.canvas.nativeCanvas.drawText(
                 "${(tempMaxValue).toInt()}",
                 0f,
-                i  + PLOT_MARGIN,
+                i.toFloat(),
                 textPaint
             )
-            tempMaxValue -=(earningStep/2.2f)
+            tempMaxValue -= canvasHeight/earningStep
             drawContext.canvas.nativeCanvas.drawCircle(
                 PLOT_MARGIN,
-                i  + PLOT_MARGIN,
+                i.toFloat(),
                 6f,
                 paint
             )
