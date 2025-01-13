@@ -1,6 +1,7 @@
 package com.example.neuro_maining.ui.custom_view
 
 import android.graphics.Paint
+import android.graphics.Path
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxHeight
@@ -9,18 +10,15 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.PaintingStyle
-import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.graphics.drawscope.DrawContext
-import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.graphics.nativeCanvas
+import androidx.compose.ui.graphics.toArgb
 import com.example.neuro_maining.data.MiningHistory
 import java.util.Calendar
-import kotlin.random.Random
 
 const val PLOT_MARGIN = 50f
-const val AXIS_FONT_SIZE = 30f
+const val AXIS_FONT_SIZE = 25f
 const val PLOT_WIDTH_FACTOR = 1.1f
 
 @Composable
@@ -34,7 +32,7 @@ fun PlotView(points:List<MiningHistory>, modifier: Modifier = Modifier) {
         textAlign = Paint.Align.CENTER
     }}
 
-    val paint = Paint().apply {
+    val axesPaint = Paint().apply {
         color = android.graphics.Color.BLACK
         style = Paint.Style.STROKE
         strokeWidth = 8f
@@ -76,7 +74,7 @@ fun PlotView(points:List<MiningHistory>, modifier: Modifier = Modifier) {
                 PLOT_MARGIN,
                 i.toFloat(),
                 6f,
-                paint
+                axesPaint
             )
         }
 
@@ -95,17 +93,17 @@ fun PlotView(points:List<MiningHistory>, modifier: Modifier = Modifier) {
                             x + PLOT_MARGIN,
                             y,
                             14f,
-                            paint
+                            axesPaint
                         )
                     }
                 }
             }
-            drawContext.canvas.drawPath(
-                path = earningPath,
-                androidx.compose.ui.graphics.Paint().apply {
-                    color = poinsPool.color.copy(alpha = 0.5f)
+            drawContext.canvas.nativeCanvas.drawPath(
+                earningPath,
+                Paint().apply {
+                    color = poinsPool.color.copy(alpha = 0.5f).toArgb()
                     strokeWidth = 10.0f
-                    style = PaintingStyle.Stroke
+                    style = Paint.Style.STROKE
                 }
             )
         }
@@ -121,22 +119,17 @@ fun PlotView(points:List<MiningHistory>, modifier: Modifier = Modifier) {
 
             drawContext.canvas.nativeCanvas.drawLine(
                 x + PLOT_MARGIN,
-                canvasHeight-PLOT_MARGIN/3,
+                canvasHeight-PLOT_MARGIN/4,
                 x + PLOT_MARGIN,
-                canvasHeight+PLOT_MARGIN/3,
-                paint
+                canvasHeight+PLOT_MARGIN/4,
+                axesPaint
             )
         }
     }
     Box(modifier = modifier.fillMaxSize()) {
         Canvas(modifier = Modifier.fillMaxHeight(0.3f).fillMaxWidth(1f)) {
             configurePaths(size.width, size.height)
-
-            drawPath(
-                path = axesPath,
-                color = Color.Black,
-                style = Stroke(width = 2f)
-            )
+            drawContext.canvas.nativeCanvas.drawPath(axesPath , axesPaint)
             drawPoints(size.height, size.width, drawContext)
         }
     }
