@@ -27,7 +27,6 @@ const val PLOT_WIDTH_FACTOR = 1.1f
 fun PlotView(points:List<MiningHistory>, modifier: Modifier = Modifier) {
 
     val axesPath = remember { Path() }
-    val axesArrowPath = remember { Path() }
 
     val textPaint = remember{Paint().apply {
         color = android.graphics.Color.BLACK
@@ -37,31 +36,18 @@ fun PlotView(points:List<MiningHistory>, modifier: Modifier = Modifier) {
 
     val paint = Paint().apply {
         color = android.graphics.Color.BLACK
-        style = Paint.Style.FILL
+        style = Paint.Style.STROKE
+        strokeWidth = 8f
     }
 
     fun configurePaths(canvasWidth: Float, canvasHeight: Float) {
         axesPath.reset()
-        axesArrowPath.reset()
-
         axesPath.apply {
             moveTo(PLOT_MARGIN, canvasHeight)
             lineTo(canvasWidth/PLOT_WIDTH_FACTOR, canvasHeight)
 
             moveTo(PLOT_MARGIN, 0f)
             lineTo(PLOT_MARGIN, canvasHeight)
-        }
-
-        axesArrowPath.apply {
-            moveTo(PLOT_MARGIN, 0f)
-            lineTo(PLOT_MARGIN / 2,  PLOT_MARGIN)
-            moveTo(PLOT_MARGIN, 0f)
-            lineTo(PLOT_MARGIN + PLOT_MARGIN / 2,   PLOT_MARGIN)
-
-            moveTo(canvasWidth/PLOT_WIDTH_FACTOR, canvasHeight)
-            lineTo(canvasWidth/PLOT_WIDTH_FACTOR - PLOT_MARGIN/2, canvasHeight - PLOT_MARGIN / 2)
-            moveTo(canvasWidth/PLOT_WIDTH_FACTOR, canvasHeight)
-            lineTo(canvasWidth/PLOT_WIDTH_FACTOR - PLOT_MARGIN/2, canvasHeight + PLOT_MARGIN / 2)
         }
     }
 
@@ -133,10 +119,11 @@ fun PlotView(points:List<MiningHistory>, modifier: Modifier = Modifier) {
                 textPaint
             )
 
-            drawContext.canvas.nativeCanvas.drawCircle(
+            drawContext.canvas.nativeCanvas.drawLine(
                 x + PLOT_MARGIN,
-                canvasHeight,
-                6f,
+                canvasHeight-PLOT_MARGIN/3,
+                x + PLOT_MARGIN,
+                canvasHeight+PLOT_MARGIN/3,
                 paint
             )
         }
@@ -144,12 +131,6 @@ fun PlotView(points:List<MiningHistory>, modifier: Modifier = Modifier) {
     Box(modifier = modifier.fillMaxSize()) {
         Canvas(modifier = Modifier.fillMaxHeight(0.3f).fillMaxWidth(1f)) {
             configurePaths(size.width, size.height)
-
-            drawPath(
-                path = axesArrowPath,
-                color = Color.Black,
-                style = Stroke(width = 2f)
-            )
 
             drawPath(
                 path = axesPath,
