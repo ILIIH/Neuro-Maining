@@ -24,6 +24,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -52,6 +53,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.text.font.FontWeight
 import com.example.neuro_maining.data.MiningHistory
 import com.example.neuro_maining.data.util.getEarningSum
+import com.example.neuro_maining.ui.theme.Graph1Color
+import com.example.neuro_maining.ui.theme.Graph2Color
+import com.example.neuro_maining.ui.theme.PrimaryColor
 
 val miningHistory = listOf(
     MiningHistory(
@@ -61,7 +65,7 @@ val miningHistory = listOf(
             12 to 100f,
             10 to 50f
         ),
-        color = Color.Green,
+        color = Graph1Color,
         miningSource = "Intel"
     ),
     MiningHistory(
@@ -71,7 +75,7 @@ val miningHistory = listOf(
             14 to 100f,
             19 to 50f
         ),
-        color = Color.Blue,
+        color = Graph2Color,
         miningSource = "SAP"
     )
 )
@@ -99,13 +103,16 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colorScheme.background
                 ) {
                     Box(modifier = Modifier.fillMaxSize()) {
-                        PlotView(
-                            miningHistory,
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .padding(top = 30.dp)
-                                .padding(horizontal = 10.dp)
-                        )
+                        Box (modifier = Modifier.background(PrimaryColor)){
+                            PlotView(
+                                miningHistory,
+                                modifier = Modifier
+                                    .fillMaxHeight(0.4f)
+                                    .fillMaxWidth(1f)
+                                    .padding(top = 30.dp, bottom = 60.dp)
+                                    .padding(horizontal = 40.dp)
+                            )
+                        }
 
                         ListOfEarnings(
                             modifier = Modifier
@@ -168,7 +175,7 @@ class MainActivity : ComponentActivity() {
                 Box(
                     modifier = Modifier
                         .size(40.dp)
-                        .background(item.color.copy(alpha = 0.5f), shape = RoundedCornerShape(8.dp))
+                        .background(item.color, shape = RoundedCornerShape(8.dp))
                 )
             }
         }
@@ -268,18 +275,3 @@ class MainActivity : ComponentActivity() {
 
 }
 
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    NeuroMainingTheme {
-        Greeting("Android")
-    }
-}
