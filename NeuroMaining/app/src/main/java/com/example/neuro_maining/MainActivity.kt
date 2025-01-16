@@ -15,7 +15,9 @@ import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
 import androidx.activity.ComponentActivity
+import androidx.activity.SystemBarStyle
 import androidx.activity.compose.setContent
+import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
@@ -49,10 +51,14 @@ import com.example.neuro_maining.ui.custom_view.PlotView
 import com.example.neuro_maining.ui.theme.NeuroMainingTheme
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.text.font.FontWeight
+import androidx.navigation.compose.rememberNavController
 import com.example.neuro_maining.data.MiningHistory
 import com.example.neuro_maining.data.util.getEarningSum
+import com.example.neuro_maining.navigation.AppNavHost
 import com.example.neuro_maining.ui.theme.Graph1Color
 import com.example.neuro_maining.ui.theme.Graph2Color
 import com.example.neuro_maining.ui.theme.PrimaryColor
@@ -83,7 +89,6 @@ val miningHistory = listOf(
 const val EARNING_MULTIPLIER = 0.3
 
 class MainActivity : ComponentActivity() {
-
     companion object {
         init {
             System.loadLibrary("neuro_maining")
@@ -92,94 +97,54 @@ class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        window.statusBarColor = PrimaryColor.toArgb()
+
         startService(context = applicationContext)
         registerBroadcastsReceivers(context = applicationContext)
         checkAndRequestPermission()
 
         setContent {
+            ChangeSystemBarsTheme(false)
+
             NeuroMainingTheme {
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    Box(modifier = Modifier.fillMaxSize()) {
-                        Box (modifier = Modifier.background(PrimaryColor)){
-                            PlotView(
-                                miningHistory,
-                                modifier = Modifier
-                                    .fillMaxHeight(0.4f)
-                                    .fillMaxWidth(1f)
-                                    .padding(top = 30.dp, bottom = 60.dp)
-                                    .padding(horizontal = 40.dp)
-                            )
-                        }
-
-                        ListOfEarnings(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .padding(top = 300.dp)
-                        )
-                    }
+                    val navController = rememberNavController()
+                    AppNavHost(navController = navController)
                 }
             }
         }
     }
-    @Composable
-    fun ListOfEarnings(modifier: Modifier) {
-        LazyColumn(
-            modifier = modifier,
-            contentPadding = PaddingValues(8.dp),
-            verticalArrangement = Arrangement.spacedBy(24.dp)
-        ) {
-            items(
-                count = miningHistory.size,
-                itemContent = { index ->
-                    ListItem(miningHistory[index])
-                }
-            )
-        }
-    }
 
     @Composable
-    fun ListItem(item: MiningHistory) {
-        Card(
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(80.dp)
-                .border(
-                    width = 2.dp,
-                    color = Color.Black,
-                    shape = RoundedCornerShape(12.dp)
-                ),
-            colors = CardDefaults.cardColors(containerColor = Color.Transparent) 
-        ) {
-            Row(
-                modifier = Modifier.fillMaxSize(),
-                horizontalArrangement = Arrangement.Center,
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                Text(
-                    text = item.miningSource,
-                    style = MaterialTheme.typography.bodyLarge.copy(
-                        fontWeight = FontWeight.Bold
-                    )
+    private fun ChangeSystemBarsTheme(lightTheme: Boolean) {
+        val barColor = PrimaryColor.toArgb()
+        LaunchedEffect(lightTheme) {
+            if (lightTheme) {
+                enableEdgeToEdge(
+                    statusBarStyle = SystemBarStyle.light(
+                        barColor, barColor,
+                    ),
+                    navigationBarStyle = SystemBarStyle.light(
+                        barColor, barColor,
+                    ),
                 )
-                Spacer(modifier = Modifier.width(40.dp))
-                Text(
-                    text = "${item.getEarningSum()*EARNING_MULTIPLIER} $",
-                    style = MaterialTheme.typography.bodyLarge.copy(
-                        fontWeight = FontWeight.Bold
-                    )
-                )
-                Spacer(modifier = Modifier.width(40.dp))
-                Box(
-                    modifier = Modifier
-                        .size(40.dp)
-                        .background(item.color, shape = RoundedCornerShape(8.dp))
+            } else {
+                enableEdgeToEdge(
+                    statusBarStyle = SystemBarStyle.dark(
+                        barColor,
+                    ),
+                    navigationBarStyle = SystemBarStyle.dark(
+                        barColor,
+                    ),
                 )
             }
         }
     }
+
 
     override fun onResume() {
         super.onResume()
