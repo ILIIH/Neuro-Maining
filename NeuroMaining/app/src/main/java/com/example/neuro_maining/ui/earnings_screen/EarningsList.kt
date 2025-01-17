@@ -25,7 +25,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -36,7 +35,7 @@ import com.example.neuro_maining.data.util.getEarningSum
 import com.example.neuro_maining.miningHistory
 
 @Composable
-fun ListOfEarnings(modifier: Modifier) {
+fun EarningsList(modifier: Modifier) {
     LazyColumn(
         modifier = modifier
             .shadow(
@@ -58,14 +57,17 @@ fun ListOfEarnings(modifier: Modifier) {
         verticalArrangement = Arrangement.spacedBy(24.dp)
     ) {
         item {
-            Text(
-                text = "Tasks earning",
-                style = MaterialTheme.typography.bodyLarge,
+            Box(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(16.dp)
-
-            )
+                    .padding(10.dp)
+            ) {
+                Text(
+                    text = "Tasks earning",
+                    style = MaterialTheme.typography.bodyLarge,
+                    modifier = Modifier.align(Alignment.Center)
+                )
+            }
         }
         items(
             count = miningHistory.size,
@@ -74,12 +76,18 @@ fun ListOfEarnings(modifier: Modifier) {
             }
         )
         item {
-            Image(
-                painter = painterResource(id = R.drawable.ic_more),
-                contentDescription = "See more icon",
-                modifier = Modifier.size(20.dp),
-                contentScale = ContentScale.Crop
-            )
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+            ) {
+                Image(
+                    painter = painterResource(id = R.drawable.ic_more),
+                    contentDescription = "See more icon",
+                    modifier = Modifier
+                        .size(30.dp)
+                        .align(Alignment.Center),
+                )
+            }
         }
     }
 }
