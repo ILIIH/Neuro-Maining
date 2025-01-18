@@ -110,50 +110,29 @@ fun PlotView(points:List<MiningHistory>, modifier: Modifier = Modifier) {
         }
     }
 
-    fun onDraw(canvasHeight: Float, canvasWidth: Float, drawContext:DrawContext){
-        val currentHour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY)
-        val hours = (0..currentHour).toList()
-        val hourSpacing = (canvasWidth / hours.size - PLOT_MARGIN / (hours.size + 1))/PLOT_WIDTH_FACTOR
-
-        var maxValue = 0f
-        for(poinsPool in points){
-            val currentMax = poinsPool.miningResults.maxBy { it.second}.second
-            maxValue = if(currentMax > maxValue ) currentMax+PLOT_MARGIN else maxValue
-        }
+    fun drawCoordinateY(canvasHeight: Float,maxValue:Float,drawContext:DrawContext){
+        val earningStep = (maxValue * 0.04 * (canvasHeight / maxValue)).toInt()
         var tempMaxValue = maxValue
-        val earningStep = (((maxValue*100)/canvasHeight)).toInt()
 
-        for (i in PLOT_MARGIN.toInt() until (canvasHeight).toInt() step earningStep) {
-            drawContext.canvas.nativeCanvas.drawText(
-                "${(tempMaxValue).toInt()}",
-                0f,
-                i.toFloat(),
-                textPaint
-            )
-            tempMaxValue -= canvasHeight/earningStep
-            drawContext.canvas.nativeCanvas.drawLine(
-                PLOT_MARGIN - PLOT_MARGIN/4,
-                i.toFloat(),
-                PLOT_MARGIN+PLOT_MARGIN/4,
-                i.toFloat(),
-                axesPaint
-            )
+        for (i in PLOT_MARGIN.toInt() until canvasHeight.toInt() step earningStep) {
+            val y = calculateY(maxValue, canvasHeight, tempMaxValue)
+
+            drawContext.canvas.nativeCanvas.apply {
+                if (tempMaxValue >= 0) {
+                    drawText("${tempMaxValue.toInt()}", 0f, y, textPaint)
+                }
+                drawLine(
+                    PLOT_MARGIN - PLOT_MARGIN / 4,
+                    i.toFloat(),
+                    PLOT_MARGIN + PLOT_MARGIN / 4,
+                    i.toFloat(),
+                    axesPaint
+                )
+            }
+            tempMaxValue -= earningStep
         }
-
-        drawGraph(canvasHeight = canvasHeight,
-            hours = hours,
-            hourSpacing = hourSpacing,
-            maxValue = maxValue,
-            drawContext = drawContext
-            )
-
-        drawPoints(canvasHeight = canvasHeight,
-            hours = hours,
-            hourSpacing = hourSpacing,
-            maxValue = maxValue,
-            drawContext = drawContext
-        )
-
+    }
+    fun drawCoordinateX(canvasHeight: Float,hourSpacing: Float,hours: List<Int>,drawContext:DrawContext){
         hours.forEachIndexed { index, hour ->
             val x = hourSpacing * index
             drawContext.canvas.nativeCanvas.drawText(
@@ -171,6 +150,46 @@ fun PlotView(points:List<MiningHistory>, modifier: Modifier = Modifier) {
                 axesPaint
             )
         }
+    }
+    fun onDraw(canvasHeight: Float, canvasWidth: Float, drawContext:DrawContext){
+        val currentHour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY)
+        val hours = (0..currentHour).toList()
+        val hourSpacing = (canvasWidth / hours.size - PLOT_MARGIN / (hours.size + 1))/PLOT_WIDTH_FACTOR
+
+        var maxValue = 0f
+        for(poinsPool in points){
+            val currentMax = poinsPool.miningResults.maxBy { it.second}.second
+            maxValue = if(currentMax > maxValue ) currentMax+PLOT_MARGIN else maxValue
+        }
+
+        drawCoordinateX(
+            canvasHeight = canvasHeight,
+            hours = hours,
+            hourSpacing = hourSpacing,
+            drawContext = drawContext
+        )
+
+        drawCoordinateY(
+            canvasHeight= canvasHeight,
+            maxValue = maxValue,
+            drawContext = drawContext)
+
+         drawGraph(
+             canvasHeight = canvasHeight,
+             hours = hours,
+             hourSpacing = hourSpacing,
+             maxValue = maxValue,
+             drawContext = drawContext
+            )
+
+        drawPoints(
+            canvasHeight = canvasHeight,
+            hours = hours,
+            hourSpacing = hourSpacing,
+            maxValue = maxValue,
+            drawContext = drawContext
+        )
+
     }
 
 
