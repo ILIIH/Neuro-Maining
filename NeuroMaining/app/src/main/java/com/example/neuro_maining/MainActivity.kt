@@ -1,6 +1,7 @@
 package com.example.neuro_maining
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.app.ActivityManager
 import android.app.AlertDialog
 import android.content.Context
@@ -51,6 +52,7 @@ import com.example.neuro_maining.ui.custom_view.PlotView
 import com.example.neuro_maining.ui.theme.NeuroMainingTheme
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.graphics.toArgb
@@ -59,6 +61,7 @@ import androidx.navigation.compose.rememberNavController
 import com.example.neuro_maining.data.MiningHistory
 import com.example.neuro_maining.data.util.getEarningSum
 import com.example.neuro_maining.navigation.AppNavHost
+import com.example.neuro_maining.navigation.BottomNavigationBar
 import com.example.neuro_maining.ui.theme.Graph1Color
 import com.example.neuro_maining.ui.theme.Graph2Color
 import com.example.neuro_maining.ui.theme.PrimaryColor
@@ -95,6 +98,7 @@ class MainActivity : ComponentActivity() {
         }
     }
 
+    @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -113,10 +117,20 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colorScheme.background
                 ) {
                     val navController = rememberNavController()
-                    AppNavHost(navController = navController)
+
+                    Scaffold(
+                        bottomBar = {
+                            BottomNavigationBar(navController)
+                        }
+                    ) {
+                        AppNavHost(
+                            navController = navController,
+                        )
+                    }
                 }
             }
         }
+
     }
 
     @Composable
@@ -144,7 +158,6 @@ class MainActivity : ComponentActivity() {
             }
         }
     }
-
 
     override fun onResume() {
         super.onResume()
