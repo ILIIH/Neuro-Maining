@@ -29,7 +29,7 @@ import com.example.neuro_maining.ui.theme.SecondaryNotSelectedColor
 @Composable
 fun BottomNavigationBar (navController: NavHostController){
 
-    var selectedTab = remember { mutableStateOf(NavigationRoute.EARNINGS_TAB) }
+    val selectedTab = remember { mutableStateOf(NavigationRoute.EARNINGS_TAB) }
 
     Box(
         modifier = Modifier
