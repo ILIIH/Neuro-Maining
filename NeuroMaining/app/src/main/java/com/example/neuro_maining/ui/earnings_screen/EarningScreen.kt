@@ -10,7 +10,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.example.neuro_maining.miningHistory
+import com.example.neuro_maining.domain.miningHistory
 import com.example.neuro_maining.ui.custom_view.PlotView
 import com.example.neuro_maining.ui.theme.PrimaryColor
 import com.example.neuro_maining.ui.theme.SecondaryBackgroundColor

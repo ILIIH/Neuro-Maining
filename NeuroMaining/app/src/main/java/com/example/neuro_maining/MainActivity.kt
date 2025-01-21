@@ -50,44 +50,13 @@ import com.example.neuro_maining.broadcast_receivers.WiFiDirectBroadcastReceiver
 import com.example.neuro_maining.services.NeuronMiningService
 import com.example.neuro_maining.ui.custom_view.PlotView
 import com.example.neuro_maining.ui.theme.NeuroMainingTheme
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.graphics.toArgb
-import androidx.compose.ui.text.font.FontWeight
 import androidx.navigation.compose.rememberNavController
-import com.example.neuro_maining.data.MiningHistory
-import com.example.neuro_maining.data.util.getEarningSum
 import com.example.neuro_maining.navigation.AppNavHost
 import com.example.neuro_maining.navigation.BottomNavigationBar
-import com.example.neuro_maining.ui.theme.Graph1Color
-import com.example.neuro_maining.ui.theme.Graph2Color
 import com.example.neuro_maining.ui.theme.PrimaryColor
-
-val miningHistory = listOf(
-    MiningHistory(
-        miningResults = listOf(
-            3 to 200f,
-            2 to 150f,
-            12 to 100f,
-            10 to 50f
-        ),
-        color = Graph1Color,
-        miningSource = "Intel"
-    ),
-    MiningHistory(
-        miningResults = listOf(
-            3 to 230f,
-            1 to 15f,
-            14 to 100f,
-            19 to 50f
-        ),
-        color = Graph2Color,
-        miningSource = "SAP"
-    )
-)
 
 const val EARNING_MULTIPLIER = 0.3
 

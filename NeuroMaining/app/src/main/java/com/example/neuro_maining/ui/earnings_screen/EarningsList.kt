@@ -33,7 +33,7 @@ import com.example.neuro_maining.EARNING_MULTIPLIER
 import com.example.neuro_maining.R
 import com.example.neuro_maining.data.MiningHistory
 import com.example.neuro_maining.data.util.getEarningSum
-import com.example.neuro_maining.miningHistory
+import com.example.neuro_maining.domain.miningHistory
 
 @Composable
 fun EarningsList(modifier: Modifier) {
