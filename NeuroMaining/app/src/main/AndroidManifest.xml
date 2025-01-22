@@ -48,14 +48,14 @@
             android:foregroundServiceType="location|dataSync|mediaPlayback"/>
 
         <receiver
-            android:name=".broadcast_receivers.NeuronMiningRestartReceiver"
+            android:name=".broadcastReceivers.NeuronMiningRestartReceiver"
             android:exported="false">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED"/>
             </intent-filter>
         </receiver>
 
-        <receiver android:name=".broadcast_receivers.GpsReceiver"
+        <receiver android:name=".broadcastReceivers.GpsReceiver"
             android:exported="false">
             <intent-filter>
                 <action android:name="android.location.PROVIDERS_CHANGED" />
@@ -64,7 +64,7 @@
 
 
         <receiver
-            android:name=".broadcast_receivers.LowBatteryReceiver"
+            android:name=".broadcastReceivers.LowBatteryReceiver"
             android:exported="false">
             <intent-filter>
                 <action android:name="android.intent.action.BATTERY_LOW" />
@@ -72,7 +72,7 @@
         </receiver>
 
         <receiver
-            android:name=".broadcast_receivers.ShutdownReceiver"
+            android:name=".broadcastReceivers.ShutdownReceiver"
             android:exported="false">
             <intent-filter>
                 <action android:name="android.intent.action.ACTION_SHUTDOWN" />

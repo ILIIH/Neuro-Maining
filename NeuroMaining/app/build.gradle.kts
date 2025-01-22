@@ -1,4 +1,5 @@
 plugins {
+    id("org.jlleitschuh.gradle.ktlint") version "11.6.0"
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
 }
@@ -70,7 +71,7 @@ android {
 }
 
 dependencies {
-    implementation ("androidx.multidex:multidex:2.0.1")
+    implementation("androidx.multidex:multidex:2.0.1")
     implementation("androidx.navigation:navigation-compose:2.8.5")
     implementation("androidx.core:core-ktx:1.13.1")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.8.6")

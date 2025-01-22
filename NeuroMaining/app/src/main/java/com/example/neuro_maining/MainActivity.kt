@@ -19,43 +19,22 @@ import androidx.activity.ComponentActivity
 import androidx.activity.SystemBarStyle
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.background
-import androidx.compose.foundation.border
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
-import androidx.core.app.ActivityCompat
-import com.example.neuro_maining.broadcast_receivers.InternetConnectivityReceiver
-import com.example.neuro_maining.broadcast_receivers.WiFiDirectBroadcastReceiver
-import com.example.neuro_maining.services.NeuronMiningService
-import com.example.neuro_maining.ui.custom_view.PlotView
-import com.example.neuro_maining.ui.theme.NeuroMainingTheme
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Surface
+import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.toArgb
+import androidx.core.app.ActivityCompat
 import androidx.navigation.compose.rememberNavController
+import com.example.neuro_maining.broadcastReceivers.InternetConnectivityReceiver
+import com.example.neuro_maining.broadcastReceivers.WiFiDirectBroadcastReceiver
 import com.example.neuro_maining.navigation.AppNavHost
 import com.example.neuro_maining.navigation.BottomNavigationBar
+import com.example.neuro_maining.services.NeuronMiningService
+import com.example.neuro_maining.ui.theme.NeuroMainingTheme
 import com.example.neuro_maining.ui.theme.PrimaryColor
 
 const val EARNING_MULTIPLIER = 0.3
@@ -93,13 +72,12 @@ class MainActivity : ComponentActivity() {
                         }
                     ) {
                         AppNavHost(
-                            navController = navController,
+                            navController = navController
                         )
                     }
                 }
             }
         }
-
     }
 
     @Composable
@@ -109,20 +87,22 @@ class MainActivity : ComponentActivity() {
             if (lightTheme) {
                 enableEdgeToEdge(
                     statusBarStyle = SystemBarStyle.light(
-                        barColor, barColor,
+                        barColor,
+                        barColor
                     ),
                     navigationBarStyle = SystemBarStyle.light(
-                        barColor, barColor,
-                    ),
+                        barColor,
+                        barColor
+                    )
                 )
             } else {
                 enableEdgeToEdge(
                     statusBarStyle = SystemBarStyle.dark(
-                        barColor,
+                        barColor
                     ),
                     navigationBarStyle = SystemBarStyle.dark(
-                        barColor,
-                    ),
+                        barColor
+                    )
                 )
             }
         }
@@ -160,7 +140,7 @@ class MainActivity : ComponentActivity() {
                 .setTitle("Enable WiFi")
                 .setMessage("This application requires WiFi to be enabled. Would you like to enable it?")
                 .setPositiveButton("Yes") { _, _ ->
-                    startActivity( Intent(Settings.ACTION_WIFI_SETTINGS));
+                    startActivity(Intent(Settings.ACTION_WIFI_SETTINGS))
                 }
                 .setNegativeButton("No") { dialog, _ ->
                     dialog.dismiss()
@@ -192,16 +172,18 @@ class MainActivity : ComponentActivity() {
         return false
     }
 
-    private fun startService(context: Context){
-        if(isServiceRunning(serviceClass = NeuronMiningService::class.java, context = context )){
+    private fun startService(context: Context) {
+        if (isServiceRunning(serviceClass = NeuronMiningService::class.java, context = context)) {
             val serviceIntent = Intent(this, NeuronMiningService::class.java)
             startService(serviceIntent)
         }
     }
 
-    private fun registerBroadcastsReceivers(context: Context){
+    private fun registerBroadcastsReceivers(context: Context) {
         val filter = IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION)
-        context.registerReceiver(InternetConnectivityReceiver(), filter
+        context.registerReceiver(
+            InternetConnectivityReceiver(),
+            filter
         )
 
         val manager = getSystemService(Context.WIFI_P2P_SERVICE) as WifiP2pManager
@@ -219,6 +201,4 @@ class MainActivity : ComponentActivity() {
 
     // native methods
     external fun Init_cpp_file(): String
-
 }
-

@@ -8,21 +8,21 @@ import com.example.neuro_maining.ui.theme.Graph2Color
 
 val miningTransactions = listOf<MiningTransaction>(
     MiningTransaction(
-        id ="23FF2",
+        id = "23FF2",
         amount = 23.2,
         currency = "£",
-        type =  TransactionType.DEPOSIT,
+        type = TransactionType.DEPOSIT,
         date = "12 Jun 2026",
-        taskName = "Intel devident",
+        taskName = "Intel devident"
     ),
     MiningTransaction(
-        id ="45YY2",
+        id = "45YY2",
         amount = 120.9,
         currency = "£",
-        type =  TransactionType.WITHDRAWAL,
+        type = TransactionType.WITHDRAWAL,
         date = "11 Oct 2026",
-        taskName = "SAP buy",
-    ),
+        taskName = "SAP buy"
+    )
 )
 
 val miningHistory = listOf(

@@ -4,20 +4,20 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.example.neuro_maining.ui.earnings_screen.EarningScreen
-import com.example.neuro_maining.ui.home_screen.HomeScreen
-import com.example.neuro_maining.ui.outcome_screen.OutcomeScreen
+import com.example.neuro_maining.screens.earningsScreen.EarningScreen
+import com.example.neuro_maining.screens.homeScreen.HomeScreen
+import com.example.neuro_maining.screens.outcomeScreen.OutcomeScreen
 
 @Composable
 fun AppNavHost(navController: NavHostController) {
-    NavHost(navController = navController, startDestination = NavigationRoute.EARNINGS_TAB.route) {
+    NavHost(navController = navController, startDestination = NavigationRoute.HOME_TAB.route) {
         composable(NavigationRoute.EARNINGS_TAB.route) {
             EarningScreen()
         }
         composable(NavigationRoute.HOME_TAB.route) {
             HomeScreen()
         }
-        composable(NavigationRoute.OUTCOME_TAB.route) {
+        composable(NavigationRoute.TASKS_TAB.route) {
             OutcomeScreen()
         }
     }

@@ -3,7 +3,7 @@ package com.example.neuro_maining.data
 enum class TransactionType {
     DEPOSIT,
     WITHDRAWAL,
-    PENDING,
+    PENDING
 }
 data class MiningTransaction(
     val id: String,
@@ -13,7 +13,6 @@ data class MiningTransaction(
     val date: String,
     val taskName: String,
     val description: String? = null
-)
-{
+) {
     override fun toString() = """ ${if (type == TransactionType.DEPOSIT) "+" else "-"} $currency $amount"""
 }

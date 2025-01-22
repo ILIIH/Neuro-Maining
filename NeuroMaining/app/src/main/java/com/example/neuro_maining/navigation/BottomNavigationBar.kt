@@ -1,6 +1,5 @@
 package com.example.neuro_maining.navigation
 
-import android.graphics.Path
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -21,14 +20,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
-import com.example.neuro_maining.R
+
 import com.example.neuro_maining.ui.theme.PrimaryColor
 import com.example.neuro_maining.ui.theme.SecondaryColor
 import com.example.neuro_maining.ui.theme.SecondaryNotSelectedColor
+import com.example.neuro_maining.R
 
 @Composable
-fun BottomNavigationBar (navController: NavHostController){
-
+fun BottomNavigationBar(navController: NavHostController) {
     val selectedTab = remember { mutableStateOf(NavigationRoute.EARNINGS_TAB) }
 
     Box(
@@ -51,12 +50,17 @@ fun BottomNavigationBar (navController: NavHostController){
                 verticalArrangement = Arrangement.SpaceBetween
             ) {
                 Image(
-                    painter = painterResource(id = if(selectedTab.value == NavigationRoute.EARNINGS_TAB) R.drawable.ic_earnings_selected_tab
-                        else R.drawable.ic_earnings_not_selected_tab),
+                    painter = painterResource(
+                        id = if (selectedTab.value == NavigationRoute.EARNINGS_TAB) {
+                            R.drawable.ic_earnings_selected_tab
+                        } else {
+                            R.drawable.ic_earnings_not_selected_tab
+                        }
+                    ),
                     contentDescription = "Earnings tab",
                     modifier = Modifier.size(25.dp)
                 )
-                Text(text = "Earnings", color =  if(selectedTab.value == NavigationRoute.EARNINGS_TAB) SecondaryColor else SecondaryNotSelectedColor)
+                Text(text = "Earnings", color = if (selectedTab.value == NavigationRoute.EARNINGS_TAB) SecondaryColor else SecondaryNotSelectedColor)
             }
             Column(
                 modifier = Modifier.weight(1f)
@@ -68,29 +72,39 @@ fun BottomNavigationBar (navController: NavHostController){
                 verticalArrangement = Arrangement.SpaceBetween
             ) {
                 Image(
-                    painter = painterResource(id =  if(selectedTab.value == NavigationRoute.HOME_TAB)  R.drawable.ic_home_selected_tab
-                        else R.drawable.ic_home_not_selected_tab),
+                    painter = painterResource(
+                        id = if (selectedTab.value == NavigationRoute.HOME_TAB) {
+                            R.drawable.ic_home_selected_tab
+                        } else {
+                            R.drawable.ic_home_not_selected_tab
+                        }
+                    ),
                     contentDescription = "Home tab",
                     modifier = Modifier.size(25.dp)
                 )
-                Text(text = "Home", color = if(selectedTab.value == NavigationRoute.HOME_TAB) SecondaryColor else SecondaryNotSelectedColor)
+                Text(text = "Home", color = if (selectedTab.value == NavigationRoute.HOME_TAB) SecondaryColor else SecondaryNotSelectedColor)
             }
             Column(
                 modifier = Modifier.weight(1f)
                     .clickable {
-                        selectedTab.value = NavigationRoute.OUTCOME_TAB
-                        navController.navigate(NavigationRoute.OUTCOME_TAB.route)
+                        selectedTab.value = NavigationRoute.TASKS_TAB
+                        navController.navigate(NavigationRoute.TASKS_TAB.route)
                     },
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.SpaceBetween
             ) {
                 Image(
-                    painter = painterResource(id = if(selectedTab.value == NavigationRoute.OUTCOME_TAB) R.drawable.ic_outcome_selected_tab
-                        else R.drawable.ic_outcome_not_selected_tab),
-                    contentDescription = "Outcome tab",
+                    painter = painterResource(
+                        id = if (selectedTab.value == NavigationRoute.TASKS_TAB) {
+                            R.drawable.ic_outcome_selected_tab
+                        } else {
+                            R.drawable.ic_outcome_not_selected_tab
+                        }
+                    ),
+                    contentDescription = "Tasks tab",
                     modifier = Modifier.size(25.dp)
                 )
-                Text(text = "Outcome", color = if(selectedTab.value == NavigationRoute.OUTCOME_TAB) SecondaryColor else SecondaryNotSelectedColor)
+                Text(text = "Tasks", color = if (selectedTab.value == NavigationRoute.TASKS_TAB) SecondaryColor else SecondaryNotSelectedColor)
             }
         }
     }

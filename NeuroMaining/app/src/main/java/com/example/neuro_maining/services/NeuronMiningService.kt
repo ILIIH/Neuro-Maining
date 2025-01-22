@@ -16,7 +16,6 @@ import java.io.PrintWriter
 import java.net.ServerSocket
 import java.net.Socket
 
-
 class NeuronMiningService : Service() {
 
     override fun onCreate() {
@@ -26,7 +25,7 @@ class NeuronMiningService : Service() {
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         setUpClientSocket()
-        //setUpServerSocket()
+        // setUpServerSocket()
         return START_STICKY
     }
 
@@ -48,7 +47,7 @@ class NeuronMiningService : Service() {
         startForeground(1, notification)
     }
 
-    private fun setUpServerSocket(){
+    private fun setUpServerSocket() {
         Thread {
             try {
                 val serverSocket =
@@ -73,7 +72,7 @@ class NeuronMiningService : Service() {
         }.start()
     }
 
-    private fun setUpClientSocket(){
+    private fun setUpClientSocket() {
         Thread {
             try {
                 val socket = Socket(
@@ -93,7 +92,6 @@ class NeuronMiningService : Service() {
                 e.printStackTrace()
             }
         }.start()
-
     }
     override fun onBind(intent: Intent?): IBinder? {
         return null
