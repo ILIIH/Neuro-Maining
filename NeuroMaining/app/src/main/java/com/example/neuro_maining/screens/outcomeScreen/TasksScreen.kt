@@ -15,6 +15,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.neuro_maining.domain.miningHistory
 import com.example.neuro_maining.ui.theme.PrimaryColor
 import com.example.neuro_maining.ui.theme.SecondaryBackgroundColor
 
@@ -26,14 +27,15 @@ fun OutcomeScreen() {
             .background(SecondaryBackgroundColor)
     ) {
         Column {
-            topBar("Tasks library")
+            TopBar("Tasks library")
             SearchingWidget()
+            ClosedTasksWidget(miningHistory.filter { it.isClosed })
         }
     }
 }
 
 @Composable
-fun topBar( screenTitle:String){
+fun TopBar( screenTitle:String){
     Box(
         modifier = Modifier
             .background(PrimaryColor)

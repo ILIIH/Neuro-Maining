@@ -29,7 +29,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import com.example.neuro_maining.EARNING_MULTIPLIER
 import com.example.neuro_maining.data.MiningHistory
 import com.example.neuro_maining.data.getEarningSum
 import com.example.neuro_maining.domain.miningHistory
@@ -126,7 +125,7 @@ fun EarningListItem(item: MiningHistory) {
             )
             Spacer(modifier = Modifier.width(40.dp))
             Text(
-                text = "${item.getEarningSum() * EARNING_MULTIPLIER}",
+                text = "${item.getEarningSum() * item.earningMultiplier}",
                 style = MaterialTheme.typography.bodyLarge.copy(
                     fontWeight = FontWeight.Bold
                 )

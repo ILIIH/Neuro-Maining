@@ -37,8 +37,6 @@ import com.example.neuro_maining.services.NeuronMiningService
 import com.example.neuro_maining.ui.theme.NeuroMainingTheme
 import com.example.neuro_maining.ui.theme.PrimaryColor
 
-const val EARNING_MULTIPLIER = 0.3
-
 class MainActivity : ComponentActivity() {
     companion object {
         init {

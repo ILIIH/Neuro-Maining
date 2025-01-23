@@ -34,7 +34,9 @@ val miningHistory = listOf(
             10 to 50f
         ),
         color = Graph1Color,
-        miningSource = "Intel"
+        miningSource = "Intel",
+        earningMultiplier = 0.3f,
+        isClosed = false
     ),
     MiningHistory(
         miningResults = listOf(
@@ -44,6 +46,32 @@ val miningHistory = listOf(
             19 to 50f
         ),
         color = Graph2Color,
-        miningSource = "SAP"
+        miningSource = "SAP",
+        earningMultiplier = 0.5f,
+        isClosed = false
+    ),
+    MiningHistory(
+        miningResults = listOf(
+            3 to 230f,
+            1 to 15f,
+            14 to 100f,
+            19 to 50f
+        ),
+        color = Graph2Color,
+        miningSource = "SAP",
+        earningMultiplier = 0.5f,
+        isClosed = true
+    ),
+    MiningHistory(
+        miningResults = listOf(
+            3 to 230f,
+            1 to 15f,
+            14 to 100f,
+            19 to 50f
+        ),
+        color = Graph2Color,
+        miningSource = "Google",
+        earningMultiplier = 0.9f,
+        isClosed = true
     )
 )
