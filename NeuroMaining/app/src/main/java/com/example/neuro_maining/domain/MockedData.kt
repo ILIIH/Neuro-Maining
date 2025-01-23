@@ -1,6 +1,6 @@
 package com.example.neuro_maining.domain
 
-import com.example.neuro_maining.data.MiningHistory
+import com.example.neuro_maining.data.MiningTask
 import com.example.neuro_maining.data.MiningTransaction
 import com.example.neuro_maining.data.TransactionType
 import com.example.neuro_maining.ui.theme.Graph1Color
@@ -25,8 +25,8 @@ val miningTransactions = listOf<MiningTransaction>(
     )
 )
 
-val miningHistory = listOf(
-    MiningHistory(
+val miningTasks = listOf(
+    MiningTask(
         miningResults = listOf(
             3 to 200f,
             2 to 150f,
@@ -36,9 +36,10 @@ val miningHistory = listOf(
         color = Graph1Color,
         miningSource = "Intel",
         earningMultiplier = 0.3f,
-        isClosed = false
+        isClosed = false,
+        incomePerHour = 23.3f
     ),
-    MiningHistory(
+    MiningTask(
         miningResults = listOf(
             3 to 230f,
             1 to 15f,
@@ -48,9 +49,10 @@ val miningHistory = listOf(
         color = Graph2Color,
         miningSource = "SAP",
         earningMultiplier = 0.5f,
-        isClosed = false
+        isClosed = false,
+        incomePerHour = 23.3f
     ),
-    MiningHistory(
+    MiningTask(
         miningResults = listOf(
             3 to 230f,
             1 to 15f,
@@ -60,9 +62,10 @@ val miningHistory = listOf(
         color = Graph2Color,
         miningSource = "SAP",
         earningMultiplier = 0.5f,
-        isClosed = true
+        isClosed = true,
+        incomePerHour = 23.3f
     ),
-    MiningHistory(
+    MiningTask(
         miningResults = listOf(
             3 to 230f,
             1 to 15f,
@@ -72,6 +75,7 @@ val miningHistory = listOf(
         color = Graph2Color,
         miningSource = "Google",
         earningMultiplier = 0.9f,
-        isClosed = true
+        isClosed = true,
+        incomePerHour = 23.3f
     )
 )

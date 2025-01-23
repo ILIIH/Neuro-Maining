@@ -29,9 +29,9 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import com.example.neuro_maining.data.MiningHistory
+import com.example.neuro_maining.data.MiningTask
 import com.example.neuro_maining.data.getEarningSum
-import com.example.neuro_maining.domain.miningHistory
+import com.example.neuro_maining.domain.miningTasks
 import com.example.neuro_maining.R
 
 @Composable
@@ -71,9 +71,9 @@ fun EarningsList(modifier: Modifier) {
             }
         }
         items(
-            count = miningHistory.size,
+            count = miningTasks.size,
             itemContent = { index ->
-                EarningListItem(miningHistory[index])
+                EarningListItem(miningTasks[index])
             }
         )
         item {
@@ -94,7 +94,7 @@ fun EarningsList(modifier: Modifier) {
 }
 
 @Composable
-fun EarningListItem(item: MiningHistory) {
+fun EarningListItem(item: MiningTask) {
     Card(
         modifier = Modifier
             .fillMaxWidth()

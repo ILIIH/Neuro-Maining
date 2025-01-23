@@ -15,7 +15,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.neuro_maining.domain.miningHistory
+import com.example.neuro_maining.domain.miningTasks
 import com.example.neuro_maining.ui.theme.PrimaryColor
 import com.example.neuro_maining.ui.theme.SecondaryBackgroundColor
 
@@ -29,7 +29,8 @@ fun OutcomeScreen() {
         Column {
             TopBar("Tasks library")
             SearchingWidget()
-            ClosedTasksWidget(miningHistory.filter { it.isClosed })
+            ClosedTasksWidget(miningTasks.filter { it.isClosed })
+            TopEarningsWidget(miningTasks.sortedBy { it.incomePerHour })
         }
     }
 }

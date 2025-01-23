@@ -7,6 +7,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -16,6 +17,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
@@ -37,11 +40,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.neuro_maining.R
 import com.example.neuro_maining.data.MiningTask
-import com.example.neuro_maining.data.getEarningSum
-import kotlin.math.round
 
 @Composable
-fun ClosedTasksWidget(miningHistory: List<MiningTask>) {
+fun TopEarningsWidget(miningTasks: List<MiningTask>) {
     val isExpanded = remember{ mutableStateOf(false) }
 
     Column(modifier = Modifier
@@ -62,7 +63,7 @@ fun ClosedTasksWidget(miningHistory: List<MiningTask>) {
         )
         .height(
             if(!isExpanded.value)160.dp
-            else (100+ ((miningHistory.size+1)*50)).dp
+            else (100+ ((miningTasks.size+1)*50)).dp
         )
         .fillMaxWidth()
         .padding(20.dp),
@@ -72,12 +73,7 @@ fun ClosedTasksWidget(miningHistory: List<MiningTask>) {
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
-                Column(
-                    modifier = Modifier.weight(1f)
-                ) {
-                    Text(text = "Closed tasks", fontWeight = FontWeight.Bold, fontSize = 20.sp)
-                    Text(text = "223.8P", fontWeight = FontWeight.Light, fontSize = 10.sp)
-                }
+                Text(text = "Top earnings", fontWeight = FontWeight.Bold, fontSize = 20.sp)
                 Image(
                     painter = painterResource(id = R.drawable.ic_expand),
                     contentDescription = "Expand icon",
@@ -92,36 +88,39 @@ fun ClosedTasksWidget(miningHistory: List<MiningTask>) {
                         }
                 )
             }
-            ClosedTasksList(isExpanded, miningHistory)
+            TopEarningsList(isExpanded, miningTasks)
 
         }
     }
 }
 
 @Composable
-fun ClosedTasksList(isExpanded: MutableState<Boolean>, miningHistory: List<MiningTask>){
-    LazyColumn (modifier = Modifier.padding(top = 20.dp)){
-        items(
-            count = if(isExpanded.value) miningHistory.size else 1,
-            itemContent = { index ->
-                ClosedTasksItem(miningHistory[index])
-            }
-        )
+fun TopEarningsList(isExpanded: MutableState<Boolean>, miningTasks: List<MiningTask>){
+    LazyVerticalGrid(
+        columns = GridCells.Fixed(3),
+        modifier = Modifier.fillMaxSize(),
+        contentPadding = PaddingValues(8.dp),
+        horizontalArrangement = Arrangement.spacedBy(8.dp),
+        verticalArrangement = Arrangement.spacedBy(8.dp)
+    ) {
+        items(if(isExpanded.value) miningTasks.size else 6) { index ->
+            TopEarningsItem(miningTasks[index])
+        }
     }
 }
 
 @Composable
-fun ClosedTasksItem(historyItem: MiningTask){
+fun TopEarningsItem(historyItem: MiningTask){
     Card(
         modifier = Modifier
             .fillMaxWidth()
             .padding(10.dp),
         colors = CardDefaults.cardColors(containerColor = Color.Transparent)
     ) {
-        Row(
+        Column(
             modifier = Modifier.fillMaxSize(),
-            horizontalArrangement = Arrangement.Center,
-            verticalAlignment = Alignment.CenterVertically
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Box(
                 modifier = Modifier
@@ -129,25 +128,16 @@ fun ClosedTasksItem(historyItem: MiningTask){
                     .background(Color.LightGray, shape = CircleShape)
             )
             Spacer(modifier = Modifier.width(40.dp))
-            Column {
-                Text(
-                    text = historyItem.miningSource,
-                    style = MaterialTheme.typography.bodyLarge.copy(
-                        fontWeight = FontWeight.Bold
-                    )
-                )
-                Text(
-                    text = "12 Jun 2028",
-                    style = MaterialTheme.typography.bodySmall.copy(
-                        fontWeight = FontWeight.ExtraLight
-                    )
-                )
-            }
-            Spacer(modifier = Modifier.width(40.dp))
             Text(
-                text = "${round(historyItem.getEarningSum() * historyItem.earningMultiplier)}P",
+                text = historyItem.miningSource,
                 style = MaterialTheme.typography.bodyLarge.copy(
                     fontWeight = FontWeight.Bold
+                )
+            )
+            Text(
+                text = "${historyItem.incomePerHour} P/H",
+                style = MaterialTheme.typography.bodySmall.copy(
+                    fontWeight = FontWeight.ExtraLight
                 )
             )
         }

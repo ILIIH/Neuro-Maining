@@ -10,7 +10,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.drawscope.DrawContext
 import androidx.compose.ui.graphics.nativeCanvas
 import androidx.compose.ui.graphics.toArgb
-import com.example.neuro_maining.data.MiningHistory
+import com.example.neuro_maining.data.MiningTask
 import java.util.Calendar
 
 const val PLOT_MARGIN = 50f
@@ -18,7 +18,7 @@ const val AXIS_FONT_SIZE = 25f
 const val PLOT_WIDTH_FACTOR = 1.1f
 
 @Composable
-fun PlotView(points: List<MiningHistory>, modifier: Modifier = Modifier) {
+fun PlotView(points: List<MiningTask>, modifier: Modifier = Modifier) {
     val axesPath = remember { Path() }
 
     val textPaint = remember {

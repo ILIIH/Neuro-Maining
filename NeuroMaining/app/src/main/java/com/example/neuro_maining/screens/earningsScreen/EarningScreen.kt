@@ -10,7 +10,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.example.neuro_maining.domain.miningHistory
+import com.example.neuro_maining.domain.miningTasks
 import com.example.neuro_maining.ui.customView.PlotView
 import com.example.neuro_maining.ui.theme.PrimaryColor
 import com.example.neuro_maining.ui.theme.SecondaryBackgroundColor
@@ -21,7 +21,7 @@ fun EarningScreen() {
         Column {
             Box(modifier = Modifier.background(PrimaryColor)) {
                 PlotView(
-                    miningHistory,
+                    miningTasks,
                     modifier = Modifier
                         .fillMaxHeight(0.4f)
                         .fillMaxWidth(1f)
