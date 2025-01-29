@@ -33,6 +33,7 @@ import com.example.neuro_maining.data.MiningTask
 import com.example.neuro_maining.data.getEarningSum
 import com.example.neuro_maining.domain.miningTasks
 import com.example.neuro_maining.R
+import kotlin.math.round
 
 @Composable
 fun EarningsList(modifier: Modifier) {
@@ -102,8 +103,8 @@ fun EarningListItem(item: MiningTask) {
         colors = CardDefaults.cardColors(containerColor = Color.Transparent)
     ) {
         Row(
-            modifier = Modifier.fillMaxSize(),
-            horizontalArrangement = Arrangement.Center,
+            modifier = Modifier.fillMaxSize().padding(horizontal = 20.dp),
+            horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically
         ) {
             Box(
@@ -125,7 +126,7 @@ fun EarningListItem(item: MiningTask) {
             )
             Spacer(modifier = Modifier.width(40.dp))
             Text(
-                text = "${item.getEarningSum() * item.earningMultiplier}",
+                text = "${round(item.getEarningSum() * item.earningMultiplier)}",
                 style = MaterialTheme.typography.bodyLarge.copy(
                     fontWeight = FontWeight.Bold
                 )
