@@ -58,7 +58,7 @@ fun BottomNavigationBar(navController: NavHostController) {
                         }
                     ),
                     contentDescription = "Earnings tab",
-                    modifier = Modifier.size(25.dp)
+                    modifier = Modifier.size(15.dp)
                 )
                 Text(text = "Earnings", color = if (selectedTab.value == NavigationRoute.EARNINGS_TAB) SecondaryColor else SecondaryNotSelectedColor)
             }
@@ -80,7 +80,7 @@ fun BottomNavigationBar(navController: NavHostController) {
                         }
                     ),
                     contentDescription = "Home tab",
-                    modifier = Modifier.size(25.dp)
+                    modifier = Modifier.size(15.dp)
                 )
                 Text(text = "Home", color = if (selectedTab.value == NavigationRoute.HOME_TAB) SecondaryColor else SecondaryNotSelectedColor)
             }
@@ -102,7 +102,7 @@ fun BottomNavigationBar(navController: NavHostController) {
                         }
                     ),
                     contentDescription = "Tasks tab",
-                    modifier = Modifier.size(25.dp)
+                    modifier = Modifier.size(15.dp)
                 )
                 Text(text = "Tasks", color = if (selectedTab.value == NavigationRoute.TASKS_TAB) SecondaryColor else SecondaryNotSelectedColor)
             }
