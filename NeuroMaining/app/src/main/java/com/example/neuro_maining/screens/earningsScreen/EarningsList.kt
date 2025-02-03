@@ -3,6 +3,7 @@ package com.example.neuro_maining.screens.earningsScreen
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
@@ -22,6 +23,8 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
@@ -37,6 +40,8 @@ import kotlin.math.round
 
 @Composable
 fun EarningsList(modifier: Modifier) {
+    val isExpanded = remember{ mutableStateOf(false) }
+
     LazyColumn(
         modifier = modifier
             .shadow(
@@ -53,7 +58,7 @@ fun EarningsList(modifier: Modifier) {
                 color = Color.White,
                 shape = RoundedCornerShape(12.dp)
             )
-            .height(250.dp),
+            .height( if(!isExpanded.value) 300.dp else (miningTasks.size*85).dp),
         contentPadding = PaddingValues(8.dp),
         verticalArrangement = Arrangement.Center
     ) {
@@ -72,7 +77,7 @@ fun EarningsList(modifier: Modifier) {
             }
         }
         items(
-            count = miningTasks.size,
+            count = if(!isExpanded.value) 3 else miningTasks.size,
             itemContent = { index ->
                 EarningListItem(miningTasks[index])
             }
@@ -87,7 +92,9 @@ fun EarningsList(modifier: Modifier) {
                 Image(
                     painter = painterResource(id = R.drawable.ic_more),
                     contentDescription = "See more icon",
-                    modifier = Modifier.size(30.dp)
+                    modifier = Modifier.size(30.dp).clickable {
+                        isExpanded.value = true;
+                    }
                 )
             }
         }
