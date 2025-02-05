@@ -28,7 +28,7 @@ import com.example.neuro_maining.R
 
 @Composable
 fun BottomNavigationBar(navController: NavHostController) {
-    val selectedTab = remember { mutableStateOf(NavigationRoute.EARNINGS_TAB) }
+    val selectedTab = remember { mutableStateOf(NavigationRoute.HOME_TAB) }
 
     Box(
         modifier = Modifier

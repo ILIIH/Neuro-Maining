@@ -25,7 +25,7 @@ import com.example.neuro_maining.ui.theme.SecondaryBackgroundColor
 fun OutcomeScreen() {
     Box(
         modifier = Modifier
-            .fillMaxSize()
+            .fillMaxWidth()
             .background(SecondaryBackgroundColor)
     ) {
         Column ( modifier = Modifier
@@ -36,6 +36,7 @@ fun OutcomeScreen() {
             SearchingWidget()
             ClosedTasksWidget(miningTasks.filter { it.isClosed })
             TopEarningsWidget(miningTasks.sortedBy { it.incomePerHour })
+            TasksBoardWidget(miningTasks)
         }
     }
 }
