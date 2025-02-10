@@ -23,13 +23,10 @@ import com.example.neuro_maining.ui.theme.SecondaryBackgroundColor
 
 @Composable
 fun OutcomeScreen() {
-    Box(
-        modifier = Modifier
-            .fillMaxWidth()
-            .background(SecondaryBackgroundColor)
-    ) {
         Column ( modifier = Modifier
             .fillMaxSize()
+            .background(SecondaryBackgroundColor)
+            .padding(bottom = 100.dp)
             .verticalScroll(rememberScrollState()))
         {
             TopBar("Tasks library")
@@ -38,7 +35,6 @@ fun OutcomeScreen() {
             TopEarningsWidget(miningTasks.sortedBy { it.incomePerHour })
             TasksBoardWidget(miningTasks)
         }
-    }
 }
 
 @Composable

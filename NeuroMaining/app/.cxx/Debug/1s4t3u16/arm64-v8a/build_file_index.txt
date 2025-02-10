@@ -1,1 +1,1 @@
-/Users/illiabranchuk/AndroidStudioProjects/NeuronMining/NeuroMaining/app/src/main/cpp/CMakeLists.txt
+/Users/illiabranchuk/Desktop/Android/NeuronMining/NeuroMaining/app/src/main/cpp/CMakeLists.txt

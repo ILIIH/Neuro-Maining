@@ -1,4 +1,4 @@
-# Install script for directory: /Users/illiabranchuk/AndroidStudioProjects/NeuronMining/NeuroMaining/app/src/main/cpp
+# Install script for directory: /Users/illiabranchuk/Desktop/Android/NeuronMining/NeuroMaining/app/src/main/cpp
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -50,5 +50,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/Users/illiabranchuk/AndroidStudioProjects/NeuronMining/NeuroMaining/app/.cxx/Debug/1s4t3u16/arm64-v8a/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/Users/illiabranchuk/Desktop/Android/NeuronMining/NeuroMaining/app/.cxx/Debug/1s4t3u16/arm64-v8a/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")
