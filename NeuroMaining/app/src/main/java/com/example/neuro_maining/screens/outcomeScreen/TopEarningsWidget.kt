@@ -98,7 +98,8 @@ fun TopEarningsList(isExpanded: MutableState<Boolean>, miningTasks: List<MiningT
         modifier = Modifier.fillMaxWidth(),
         contentPadding = PaddingValues(8.dp),
         horizontalArrangement = Arrangement.spacedBy(8.dp),
-        verticalArrangement = Arrangement.spacedBy(8.dp)
+        verticalArrangement = Arrangement.spacedBy(8.dp),
+        userScrollEnabled = false
     ) {
         items(if(isExpanded.value) miningTasks.size else 6) { index ->
             TopEarningsItem(miningTasks[index])

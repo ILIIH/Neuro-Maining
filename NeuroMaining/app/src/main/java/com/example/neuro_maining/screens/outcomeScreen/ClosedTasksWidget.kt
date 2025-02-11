@@ -99,7 +99,10 @@ fun ClosedTasksWidget(miningHistory: List<MiningTask>) {
 
 @Composable
 fun ClosedTasksList(isExpanded: MutableState<Boolean>, miningHistory: List<MiningTask>){
-    LazyColumn (modifier = Modifier.padding(top = 20.dp)){
+    LazyColumn (
+        modifier = Modifier.padding(top = 20.dp),
+        userScrollEnabled = false
+    ){
         items(
             count = if(isExpanded.value) miningHistory.size else 1,
             itemContent = { index ->

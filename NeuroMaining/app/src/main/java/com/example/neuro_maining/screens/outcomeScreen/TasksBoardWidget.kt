@@ -36,10 +36,9 @@ const val TASK_HEIGHT = 120
 fun TasksBoardWidget(miningTasks: List<MiningTask>) {
     LazyVerticalGrid(
         columns = GridCells.Fixed(2),
-        modifier = Modifier.fillMaxWidth().height((miningTasks.size * TASK_HEIGHT /2 + 100).dp),
-        contentPadding = PaddingValues(8.dp),
-        horizontalArrangement = Arrangement.spacedBy(8.dp),
-        verticalArrangement = Arrangement.spacedBy(8.dp)
+        modifier = Modifier.fillMaxWidth().padding(30.dp).height((miningTasks.size * TASK_HEIGHT /2 + 100).dp),
+        horizontalArrangement = Arrangement.spacedBy(20.dp),
+        verticalArrangement = Arrangement.spacedBy(20.dp)
     ) {
         items( miningTasks.size) { index ->
             TasksBoardItem(miningTasks[index])
@@ -52,7 +51,6 @@ fun TasksBoardItem(historyItem: MiningTask){
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(10.dp)
             .height(TASK_HEIGHT.dp),
         colors = CardDefaults.cardColors(containerColor = Color.Transparent)
     ) {
