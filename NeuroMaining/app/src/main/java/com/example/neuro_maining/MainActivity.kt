@@ -15,7 +15,6 @@ import android.net.wifi.p2p.WifiP2pManager
 import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
-import androidx.activity.ComponentActivity
 import androidx.activity.SystemBarStyle
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
@@ -25,19 +24,29 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.toArgb
 import androidx.core.app.ActivityCompat
+import androidx.fragment.app.FragmentActivity
 import androidx.navigation.compose.rememberNavController
 import com.example.neuro_maining.broadcastReceivers.InternetConnectivityReceiver
 import com.example.neuro_maining.broadcastReceivers.WiFiDirectBroadcastReceiver
+import com.example.neuro_maining.data.AuthManagerIml
+import com.example.neuro_maining.data.AuthStatus
+import com.example.neuro_maining.domain.AuthManager
 import com.example.neuro_maining.navigation.AppNavHost
 import com.example.neuro_maining.navigation.BottomNavigationBar
+import com.example.neuro_maining.screens.authScreen.AuthScreen
 import com.example.neuro_maining.services.NeuronMiningService
 import com.example.neuro_maining.ui.theme.NeuroMainingTheme
 import com.example.neuro_maining.ui.theme.PrimaryColor
 
-class MainActivity : ComponentActivity() {
+class MainActivity : FragmentActivity() {
+
+    private val authManager: AuthManager by lazy {
+        AuthManagerIml(context = applicationContext)
+    }
     companion object {
         init {
             System.loadLibrary("neuro_maining")
@@ -47,32 +56,43 @@ class MainActivity : ComponentActivity() {
     @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setContent {
+            val authState = authManager.authState.collectAsState()
+            when(authState.value){
+                AuthStatus.Success -> AuthSuccess()
+                AuthStatus.Failed -> {}
+                AuthStatus.AuthRequired -> AuthScreen(authManager)
+                else ->  {}
+            }
 
+        }
+    }
+
+    @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
+    @Composable
+    private fun AuthSuccess(){
+        ChangeSystemBarsTheme(false)
         window.statusBarColor = PrimaryColor.toArgb()
 
         startService(context = applicationContext)
         registerBroadcastsReceivers(context = applicationContext)
         checkAndRequestPermission()
 
-        setContent {
-            ChangeSystemBarsTheme(false)
+        NeuroMainingTheme {
+            Surface(
+                modifier = Modifier.fillMaxSize(),
+                color = MaterialTheme.colorScheme.background
+            ) {
+                val navController = rememberNavController()
 
-            NeuroMainingTheme {
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
-                ) {
-                    val navController = rememberNavController()
-
-                    Scaffold(
-                        bottomBar = {
-                            BottomNavigationBar(navController)
-                        }
-                    ) {
-                        AppNavHost(
-                            navController = navController
-                        )
+                Scaffold(
+                    bottomBar = {
+                        BottomNavigationBar(navController)
                     }
+                ) {
+                    AppNavHost(
+                        navController = navController
+                    )
                 }
             }
         }
