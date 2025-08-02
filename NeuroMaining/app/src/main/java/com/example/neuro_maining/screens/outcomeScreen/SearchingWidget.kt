@@ -1,4 +1,4 @@
-package com.example.neuro_maining.screens.outcomeScreen
+package com.example.neuroMaining.screens.outcomeScreen
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -29,36 +29,36 @@ import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
-import com.example.neuro_maining.R
+import com.example.neuroMaining.R
 
 @Composable
 fun SearchingWidget() {
-    var searchText by remember { mutableStateOf("Find task") };
+    var searchText by remember { mutableStateOf("Find task") }
     var hasBeenFocused by remember { mutableStateOf(false) }
     val keyboardController = LocalSoftwareKeyboardController.current
 
-    Row(modifier = Modifier
-        .padding(30.dp)
-        .shadow(
-            elevation = 8.dp,
-            shape = RoundedCornerShape(12.dp),
-            clip = false
-        )
-        .border(
-            width = 1.dp,
-            color = Color.Black,
-            shape = RoundedCornerShape(12.dp)
-        )
-        .background(
-            color = Color.White,
-            shape = RoundedCornerShape(12.dp)
-        )
-        .height(100.dp)
-        .fillMaxWidth()
-        .padding(20.dp),
+    Row(
+        modifier = Modifier
+            .padding(30.dp)
+            .shadow(
+                elevation = 8.dp,
+                shape = RoundedCornerShape(12.dp),
+                clip = false
+            )
+            .border(
+                width = 1.dp,
+                color = Color.Black,
+                shape = RoundedCornerShape(12.dp)
+            )
+            .background(
+                color = Color.White,
+                shape = RoundedCornerShape(12.dp)
+            )
+            .height(100.dp)
+            .fillMaxWidth()
+            .padding(20.dp),
         verticalAlignment = Alignment.CenterVertically
-    )
-    {
+    ) {
         Image(
             painter = painterResource(id = R.drawable.ic_magnifying_glass),
             contentDescription = "Magnifying glass",
@@ -67,7 +67,7 @@ fun SearchingWidget() {
         Spacer(modifier = Modifier.width(10.dp))
         TextField(
             value = searchText,
-            onValueChange = { searchText = it},
+            onValueChange = { searchText = it },
             modifier = Modifier.fillMaxWidth()
                 .onFocusChanged { focusState ->
                     if (focusState.isFocused && !hasBeenFocused) {
@@ -86,10 +86,9 @@ fun SearchingWidget() {
                 focusedContainerColor = Color.Transparent,
                 unfocusedContainerColor = Color.Transparent,
                 disabledContainerColor = Color.Transparent,
-                errorContainerColor = Color.Transparent,
+                errorContainerColor = Color.Transparent
             )
         )
         Spacer(modifier = Modifier.width(10.dp))
-
     }
 }

@@ -1,4 +1,4 @@
-package com.example.neuro_maining
+package com.example.neuroMaining
 
 import android.Manifest
 import android.annotation.SuppressLint
@@ -24,53 +24,44 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.toArgb
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.FragmentActivity
+import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
-import com.example.neuro_maining.broadcastReceivers.InternetConnectivityReceiver
-import com.example.neuro_maining.broadcastReceivers.WiFiDirectBroadcastReceiver
-import com.example.neuro_maining.data.AuthManagerIml
-import com.example.neuro_maining.data.AuthStatus
-import com.example.neuro_maining.domain.AuthManager
-import com.example.neuro_maining.navigation.AppNavHost
-import com.example.neuro_maining.navigation.BottomNavigationBar
-import com.example.neuro_maining.screens.authScreen.AuthScreen
-import com.example.neuro_maining.services.NeuronMiningService
-import com.example.neuro_maining.ui.theme.NeuroMainingTheme
-import com.example.neuro_maining.ui.theme.PrimaryColor
+import com.example.neuroMaining.broadcastReceivers.InternetConnectivityReceiver
+import com.example.neuroMaining.broadcastReceivers.WiFiDirectBroadcastReceiver
+import com.example.neuroMaining.data.AuthStatus
+import com.example.neuroMaining.navigation.AppNavHost
+import com.example.neuroMaining.navigation.BottomNavigationBar
+import com.example.neuroMaining.screens.authScreen.AuthScreen
+import com.example.neuroMaining.services.NeuronMiningService
+import com.example.neuroMaining.ui.theme.NeuroMainingTheme
+import com.example.neuroMaining.ui.theme.PrimaryColor
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : FragmentActivity() {
-
-    private val authManager: AuthManager by lazy {
-        AuthManagerIml(context = applicationContext)
-    }
-    companion object {
-        init {
-            System.loadLibrary("neuro_maining")
-        }
-    }
+    private val authState = mutableStateOf<AuthStatus>(AuthStatus.AuthPasswordRequired)
 
     @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            val authState = authManager.authState.collectAsState()
-            when(authState.value){
-                AuthStatus.Success -> AuthSuccess()
-                AuthStatus.Failed -> {}
-                AuthStatus.AuthRequired -> AuthScreen(authManager)
-                else ->  {}
+            val navController = rememberNavController()
+            when (authState.value) {
+                AuthStatus.SuccessAuth -> AuthSuccess(navController)
+                AuthStatus.AuthPasswordRequired -> AuthScreen { authState.value = AuthStatus.SuccessAuth }
+                else -> {}
             }
-
         }
     }
 
     @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
     @Composable
-    private fun AuthSuccess(){
+    private fun AuthSuccess(navController: NavHostController) {
         ChangeSystemBarsTheme(false)
         window.statusBarColor = PrimaryColor.toArgb()
 
@@ -83,8 +74,6 @@ class MainActivity : FragmentActivity() {
                 modifier = Modifier.fillMaxSize(),
                 color = MaterialTheme.colorScheme.background
             ) {
-                val navController = rememberNavController()
-
                 Scaffold(
                     bottomBar = {
                         BottomNavigationBar(navController)

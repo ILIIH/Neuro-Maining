@@ -1,9 +1,9 @@
-package com.example.neuro_maining.broadcastReceivers
+package com.example.neuroMaining.broadcastReceivers
 
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
-import com.example.neuro_maining.services.NeuronMiningService
+import com.example.neuroMaining.services.NeuronMiningService
 
 class NeuronMiningRestartReceiver : BroadcastReceiver() {
     override fun onReceive(context: Context, intent: Intent) {

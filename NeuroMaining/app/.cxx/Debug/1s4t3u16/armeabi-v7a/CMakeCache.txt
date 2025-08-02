@@ -150,7 +150,7 @@ CMAKE_PROJECT_DESCRIPTION:STATIC=
 CMAKE_PROJECT_HOMEPAGE_URL:STATIC=
 
 //Value Computed by CMake
-CMAKE_PROJECT_NAME:STATIC=neuro_maining
+CMAKE_PROJECT_NAME:STATIC=neuroMaining
 
 //Path to a program.
 CMAKE_RANLIB:FILEPATH=/Users/illiabranchuk/Library/Android/sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/darwin-x86_64/bin/llvm-ranlib
@@ -227,13 +227,13 @@ CMAKE_TOOLCHAIN_FILE:FILEPATH=/Users/illiabranchuk/Library/Android/sdk/ndk/23.1.
 CMAKE_VERBOSE_MAKEFILE:BOOL=FALSE
 
 //Value Computed by CMake
-neuro_maining_BINARY_DIR:STATIC=/Users/illiabranchuk/AndroidStudioProjects/NeuronMining/NeuroMaining/app/.cxx/Debug/1s4t3u16/armeabi-v7a
+neuroMaining_BINARY_DIR:STATIC=/Users/illiabranchuk/AndroidStudioProjects/NeuronMining/NeuroMaining/app/.cxx/Debug/1s4t3u16/armeabi-v7a
 
 //Value Computed by CMake
-neuro_maining_IS_TOP_LEVEL:STATIC=ON
+neuroMaining_IS_TOP_LEVEL:STATIC=ON
 
 //Value Computed by CMake
-neuro_maining_SOURCE_DIR:STATIC=/Users/illiabranchuk/AndroidStudioProjects/NeuronMining/NeuroMaining/app/src/main/cpp
+neuroMaining_SOURCE_DIR:STATIC=/Users/illiabranchuk/AndroidStudioProjects/NeuronMining/NeuroMaining/app/src/main/cpp
 
 
 ########################

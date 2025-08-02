@@ -1,10 +1,10 @@
-package com.example.neuro_maining.domain
+package com.example.neuroMaining.domain
 
-import com.example.neuro_maining.data.MiningTask
-import com.example.neuro_maining.data.MiningTransaction
-import com.example.neuro_maining.data.TransactionType
-import com.example.neuro_maining.ui.theme.Graph1Color
-import com.example.neuro_maining.ui.theme.Graph2Color
+import com.example.neuroMaining.data.MiningTask
+import com.example.neuroMaining.data.MiningTransaction
+import com.example.neuroMaining.data.TransactionType
+import com.example.neuroMaining.ui.theme.Graph1Color
+import com.example.neuroMaining.ui.theme.Graph2Color
 
 val miningTransactions = listOf<MiningTransaction>(
     MiningTransaction(

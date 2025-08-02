@@ -17,10 +17,10 @@
     "{LIST_OF_TARGETS_TO_BUILD}"
   ],
   "libraries": {
-    "neuro_maining::@6890427a1f51a3e7e1df": {
-      "artifactName": "neuro_maining",
+    "neuroMaining::@6890427a1f51a3e7e1df": {
+      "artifactName": "neuroMaining",
       "abi": "x86",
-      "output": "/Users/illiabranchuk/AndroidStudioProjects/NeuronMining/NeuroMaining/app/build/intermediates/cxx/RelWithDebInfo/3ej3h2o1/obj/x86/libneuro_maining.so",
+      "output": "/Users/illiabranchuk/AndroidStudioProjects/NeuronMining/NeuroMaining/app/build/intermediates/cxx/RelWithDebInfo/3ej3h2o1/obj/x86/libneuroMaining.so",
       "runtimeFiles": []
     }
   }

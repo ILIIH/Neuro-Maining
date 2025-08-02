@@ -1,4 +1,4 @@
-package com.example.neuro_maining.screens.homeScreen
+package com.example.neuroMaining.screens.homeScreen
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -28,8 +28,8 @@ import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import com.example.neuro_maining.data.MiningTransaction
-import com.example.neuro_maining.domain.miningTransactions
+import com.example.neuroMaining.data.MiningTransaction
+import com.example.neuroMaining.domain.miningTransactions
 
 @Composable
 fun TransactionsList(modifier: Modifier) {

@@ -1,4 +1,4 @@
-package com.example.neuro_maining.framework
+package com.example.neuroMaining.framework
 
 import android.net.wifi.p2p.WifiP2pDevice
 

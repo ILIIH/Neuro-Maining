@@ -1,4 +1,4 @@
-package com.example.neuro_maining
+package com.example.neuroMaining
 
 import junit.framework.TestCase.assertEquals
 import org.junit.Test

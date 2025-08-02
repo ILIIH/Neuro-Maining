@@ -1,4 +1,4 @@
-package com.example.neuro_maining.screens.outcomeScreen
+package com.example.neuroMaining.screens.outcomeScreen
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -34,37 +34,41 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.neuro_maining.R
-import com.example.neuro_maining.data.MiningTask
-import com.example.neuro_maining.data.getEarningSum
+import com.example.neuroMaining.R
+import com.example.neuroMaining.data.MiningTask
+import com.example.neuroMaining.data.getEarningSum
 import kotlin.math.round
 
 @Composable
 fun ClosedTasksWidget(miningHistory: List<MiningTask>) {
-    val isExpanded = remember{ mutableStateOf(false) }
+    val isExpanded = remember { mutableStateOf(false) }
 
-    Column(modifier = Modifier
-        .padding(30.dp)
-        .shadow(
-            elevation = 8.dp,
-            shape = RoundedCornerShape(12.dp),
-            clip = false
-        )
-        .border(
-            width = 1.dp,
-            color = Color.Black,
-            shape = RoundedCornerShape(12.dp)
-        )
-        .background(
-            color = Color.White,
-            shape = RoundedCornerShape(12.dp)
-        )
-        .height(
-            if(!isExpanded.value)160.dp
-            else (100+ ((miningHistory.size+1)*50)).dp
-        )
-        .fillMaxWidth()
-        .padding(20.dp),
+    Column(
+        modifier = Modifier
+            .padding(30.dp)
+            .shadow(
+                elevation = 8.dp,
+                shape = RoundedCornerShape(12.dp),
+                clip = false
+            )
+            .border(
+                width = 1.dp,
+                color = Color.Black,
+                shape = RoundedCornerShape(12.dp)
+            )
+            .background(
+                color = Color.White,
+                shape = RoundedCornerShape(12.dp)
+            )
+            .height(
+                if (!isExpanded.value) {
+                    160.dp
+                } else {
+                    (100 + ((miningHistory.size + 1) * 50)).dp
+                }
+            )
+            .fillMaxWidth()
+            .padding(20.dp)
     ) {
         Column {
             Row(
@@ -83,8 +87,11 @@ fun ClosedTasksWidget(miningHistory: List<MiningTask>) {
                     modifier = Modifier
                         .size(25.dp)
                         .graphicsLayer(
-                            rotationZ = if(!isExpanded.value) 270f
-                            else 90f
+                            rotationZ = if (!isExpanded.value) {
+                                270f
+                            } else {
+                                90f
+                            }
                         )
                         .clickable {
                             isExpanded.value = !isExpanded.value
@@ -92,16 +99,15 @@ fun ClosedTasksWidget(miningHistory: List<MiningTask>) {
                 )
             }
             ClosedTasksList(isExpanded, miningHistory)
-
         }
     }
 }
 
 @Composable
-fun ClosedTasksList(isExpanded: MutableState<Boolean>, miningHistory: List<MiningTask>){
-    LazyColumn (modifier = Modifier.padding(top = 20.dp)){
+fun ClosedTasksList(isExpanded: MutableState<Boolean>, miningHistory: List<MiningTask>) {
+    LazyColumn(modifier = Modifier.padding(top = 20.dp)) {
         items(
-            count = if(isExpanded.value) miningHistory.size else 1,
+            count = if (isExpanded.value) miningHistory.size else 1,
             itemContent = { index ->
                 ClosedTasksItem(miningHistory[index])
             }
@@ -110,7 +116,7 @@ fun ClosedTasksList(isExpanded: MutableState<Boolean>, miningHistory: List<Minin
 }
 
 @Composable
-fun ClosedTasksItem(historyItem: MiningTask){
+fun ClosedTasksItem(historyItem: MiningTask) {
     Card(
         modifier = Modifier
             .fillMaxWidth()

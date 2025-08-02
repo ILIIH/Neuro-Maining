@@ -1,69 +1,76 @@
-package com.example.neuro_maining.screens.authScreen
+package com.example.neuroMaining.screens.authScreen
 
 // Android biometric authentication
+import android.annotation.SuppressLint
 import android.os.Build
+import android.widget.Toast
 import androidx.biometric.BiometricManager
 import androidx.biometric.BiometricPrompt
 
 // AndroidX Compose and lifecycle
-import androidx.activity.ComponentActivity
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.compose.runtime.*
 import androidx.compose.foundation.layout.*
-import androidx.compose.material3.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 
 // Android utilities
-import android.widget.Toast
+import androidx.compose.foundation.Image
 import androidx.core.content.ContextCompat
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.res.painterResource
 import androidx.fragment.app.FragmentActivity
-import com.example.neuro_maining.data.AuthStatus
-import com.example.neuro_maining.domain.AuthManager
+import com.example.neuroMaining.R
 
+import com.example.neuroMaining.data.AuthStatus
+import com.example.neuroMaining.viewModels.AuthScreenViewModel
 
+@SuppressLint("ContextCastToActivity")
 @Composable
-fun AuthScreen(authManager : AuthManager ) {
+fun AuthScreen(viewModel: AuthScreenViewModel = hiltViewModel(), authUser: () -> Unit) {
     val context = LocalContext.current
-    var authStatus by remember { mutableStateOf("Waiting for authentication...") }
+    var authStatus = viewModel.authState.collectAsState()
     val activity = LocalContext.current as FragmentActivity
-
     val authenticators = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
         BiometricManager.Authenticators.BIOMETRIC_STRONG or
-                BiometricManager.Authenticators.DEVICE_CREDENTIAL
+            BiometricManager.Authenticators.DEVICE_CREDENTIAL
     } else {
         BiometricManager.Authenticators.BIOMETRIC_WEAK
     }
     val biometricManager = BiometricManager.from(context)
-    val canAuthenticate = biometricManager.canAuthenticate(authenticators)
+
+    viewModel.setAuthStatus(biometricManager.canAuthenticate(authenticators))
 
     val executor = ContextCompat.getMainExecutor(context)
 
     val biometricPrompt = remember {
-        BiometricPrompt(activity, executor, object : BiometricPrompt.AuthenticationCallback() {
-            override fun onAuthenticationSucceeded(result: BiometricPrompt.AuthenticationResult) {
-                super.onAuthenticationSucceeded(result)
-                authManager.authWithBiometry(AuthStatus.Success)
-            }
+        BiometricPrompt(
+            activity,
+            executor,
+            object : BiometricPrompt.AuthenticationCallback() {
+                override fun onAuthenticationSucceeded(result: BiometricPrompt.AuthenticationResult) {
+                    super.onAuthenticationSucceeded(result)
+                    viewModel.authWithBiometry(AuthStatus.SuccessAuth)
+                }
 
-            override fun onAuthenticationError(errorCode: Int, errString: CharSequence) {
-                super.onAuthenticationError(errorCode, errString)
-                authManager.authWithBiometry(AuthStatus.Error(errorMessage = errString.toString()))
-            }
+                override fun onAuthenticationError(errorCode: Int, errString: CharSequence) {
+                    super.onAuthenticationError(errorCode, errString)
+                    viewModel.authWithBiometry(AuthStatus.FailedAuth)
+                }
 
-            override fun onAuthenticationFailed() {
-                super.onAuthenticationFailed()
-                authManager.authWithBiometry(AuthStatus.Failed)
+                override fun onAuthenticationFailed() {
+                    super.onAuthenticationFailed()
+                    viewModel.authWithBiometry(AuthStatus.FailedAuth)
+                }
             }
-        })
+        )
     }
 
     val promptInfo = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
@@ -73,7 +80,7 @@ fun AuthScreen(authManager : AuthManager ) {
             .setSubtitle("Authenticate using biometrics or device credentials")
             .setAllowedAuthenticators(
                 BiometricManager.Authenticators.BIOMETRIC_STRONG or
-                        BiometricManager.Authenticators.DEVICE_CREDENTIAL
+                    BiometricManager.Authenticators.DEVICE_CREDENTIAL
             )
             .build()
     } else {
@@ -85,26 +92,43 @@ fun AuthScreen(authManager : AuthManager ) {
             .build()
     }
 
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(24.dp),
-        verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        Text(text = authStatus)
-        Spacer(modifier = Modifier.height(16.dp))
-
-        Button(
-            onClick = {
-                if (canAuthenticate == BiometricManager.BIOMETRIC_SUCCESS) {
-                    biometricPrompt.authenticate(promptInfo)
-                } else {
-                    Toast.makeText(context, "Biometric not available or not set up", Toast.LENGTH_SHORT).show()
-                }
+    when (authStatus.value) {
+        AuthStatus.AuthBiometryRequired -> {
+            biometricPrompt.authenticate(promptInfo)
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(24.dp),
+                verticalArrangement = Arrangement.Center,
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                Image(
+                    painter = painterResource(id = R.drawable.ic_fingerprint),
+                    contentDescription = "Biometry auth icon",
+                    modifier = Modifier.size(25.dp)
+                )
             }
-        ) {
-            Text("Authenticate")
+        }
+        AuthStatus.AuthPasswordRequired -> {
+            PasswordAuthScreen(
+                returnToBiometric = {
+                    viewModel.setAuthStatus(biometricManager.canAuthenticate(authenticators))
+                },
+                validatePasscode = {
+                    viewModel.validatePasscode(it)
+                }
+            )
+        }
+        AuthStatus.RegistrationRequired -> {
+            RegisterAccountScreen {
+                viewModel.createPasscode(it)
+            }
+        }
+        AuthStatus.SuccessAuth -> {
+            authUser()
+        }
+        AuthStatus.FailedAuth -> {
+            Toast.makeText(context, "Auth error ", Toast.LENGTH_SHORT).show() // TODO change approach
         }
     }
 }

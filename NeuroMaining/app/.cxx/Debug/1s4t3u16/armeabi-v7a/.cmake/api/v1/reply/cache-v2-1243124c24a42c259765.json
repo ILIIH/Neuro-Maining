@@ -867,7 +867,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "neuro_maining"
+			"value" : "neuroMaining"
 		},
 		{
 			"name" : "CMAKE_RANLIB",
@@ -1198,7 +1198,7 @@
 			"value" : "FALSE"
 		},
 		{
-			"name" : "neuro_maining_BINARY_DIR",
+			"name" : "neuroMaining_BINARY_DIR",
 			"properties" : 
 			[
 				{
@@ -1210,7 +1210,7 @@
 			"value" : "/Users/illiabranchuk/AndroidStudioProjects/NeuronMining/NeuroMaining/app/.cxx/Debug/1s4t3u16/armeabi-v7a"
 		},
 		{
-			"name" : "neuro_maining_IS_TOP_LEVEL",
+			"name" : "neuroMaining_IS_TOP_LEVEL",
 			"properties" : 
 			[
 				{
@@ -1222,7 +1222,7 @@
 			"value" : "ON"
 		},
 		{
-			"name" : "neuro_maining_SOURCE_DIR",
+			"name" : "neuroMaining_SOURCE_DIR",
 			"properties" : 
 			[
 				{

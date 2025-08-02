@@ -1,4 +1,4 @@
-package com.example.neuro_maining.screens.earningsScreen
+package com.example.neuroMaining.screens.earningsScreen
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -10,10 +10,10 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.example.neuro_maining.domain.miningTasks
-import com.example.neuro_maining.ui.customView.PlotView
-import com.example.neuro_maining.ui.theme.PrimaryColor
-import com.example.neuro_maining.ui.theme.SecondaryBackgroundColor
+import com.example.neuroMaining.domain.miningTasks
+import com.example.neuroMaining.ui.customView.PlotView
+import com.example.neuroMaining.ui.theme.PrimaryColor
+import com.example.neuroMaining.ui.theme.SecondaryBackgroundColor
 
 @Composable
 fun EarningScreen() {

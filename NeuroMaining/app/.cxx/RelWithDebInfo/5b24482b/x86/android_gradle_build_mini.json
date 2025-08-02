@@ -1,0 +1,27 @@
+{
+  "buildFiles": [
+    "/Users/illiabranchuk/AndroidStudioProjects/NeuronMining/NeuroMaining/app/src/main/cpp/CMakeLists.txt"
+  ],
+  "cleanCommandsComponents": [
+    [
+      "/Users/illiabranchuk/Library/Android/sdk/cmake/3.22.1/bin/ninja",
+      "-C",
+      "/Users/illiabranchuk/AndroidStudioProjects/NeuronMining/NeuroMaining/app/.cxx/RelWithDebInfo/5b24482b/x86",
+      "clean"
+    ]
+  ],
+  "buildTargetsCommandComponents": [
+    "/Users/illiabranchuk/Library/Android/sdk/cmake/3.22.1/bin/ninja",
+    "-C",
+    "/Users/illiabranchuk/AndroidStudioProjects/NeuronMining/NeuroMaining/app/.cxx/RelWithDebInfo/5b24482b/x86",
+    "{LIST_OF_TARGETS_TO_BUILD}"
+  ],
+  "libraries": {
+    "neuroMaining::@6890427a1f51a3e7e1df": {
+      "artifactName": "neuroMaining",
+      "abi": "x86",
+      "output": "/Users/illiabranchuk/AndroidStudioProjects/NeuronMining/NeuroMaining/app/build/intermediates/cxx/RelWithDebInfo/5b24482b/obj/x86/libneuroMaining.so",
+      "runtimeFiles": []
+    }
+  }
+}

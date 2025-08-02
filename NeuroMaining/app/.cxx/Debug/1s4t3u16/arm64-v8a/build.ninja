@@ -11,7 +11,7 @@
 # =============================================================================
 
 # =============================================================================
-# Project: neuro_maining
+# Project: neuroMaining
 # Configurations: Debug
 # =============================================================================
 
@@ -41,47 +41,47 @@ include CMakeFiles/rules.ninja
 
 cmake_ninja_workdir = /Users/illiabranchuk/AndroidStudioProjects/NeuronMining/NeuroMaining/app/.cxx/Debug/1s4t3u16/arm64-v8a/
 # =============================================================================
-# Object build statements for SHARED_LIBRARY target neuro_maining
+# Object build statements for SHARED_LIBRARY target neuroMaining
 
 
 #############################################
-# Order-only phony target for neuro_maining
+# Order-only phony target for neuroMaining
 
-build cmake_object_order_depends_target_neuro_maining: phony || CMakeFiles/neuro_maining.dir
+build cmake_object_order_depends_target_neuroMaining: phony || CMakeFiles/neuroMaining.dir
 
-build CMakeFiles/neuro_maining.dir/neuro_maining.cpp.o: CXX_COMPILER__neuro_maining_Debug /Users/illiabranchuk/AndroidStudioProjects/NeuronMining/NeuroMaining/app/src/main/cpp/neuro_maining.cpp || cmake_object_order_depends_target_neuro_maining
-  DEFINES = -Dneuro_maining_EXPORTS
-  DEP_FILE = CMakeFiles/neuro_maining.dir/neuro_maining.cpp.o.d
+build CMakeFiles/neuroMaining.dir/neuroMaining.cpp.o: CXX_COMPILER__neuroMaining_Debug /Users/illiabranchuk/AndroidStudioProjects/NeuronMining/NeuroMaining/app/src/main/cpp/neuroMaining.cpp || cmake_object_order_depends_target_neuroMaining
+  DEFINES = -DneuroMaining_EXPORTS
+  DEP_FILE = CMakeFiles/neuroMaining.dir/neuroMaining.cpp.o.d
   FLAGS = -std=c++17 -g  -fno-limit-debug-info -fPIC -std=c++11
-  OBJECT_DIR = CMakeFiles/neuro_maining.dir
-  OBJECT_FILE_DIR = CMakeFiles/neuro_maining.dir
+  OBJECT_DIR = CMakeFiles/neuroMaining.dir
+  OBJECT_FILE_DIR = CMakeFiles/neuroMaining.dir
 
-build CMakeFiles/neuro_maining.dir/Neuron.cpp.o: CXX_COMPILER__neuro_maining_Debug /Users/illiabranchuk/AndroidStudioProjects/NeuronMining/NeuroMaining/app/src/main/cpp/Neuron.cpp || cmake_object_order_depends_target_neuro_maining
-  DEFINES = -Dneuro_maining_EXPORTS
-  DEP_FILE = CMakeFiles/neuro_maining.dir/Neuron.cpp.o.d
+build CMakeFiles/neuroMaining.dir/Neuron.cpp.o: CXX_COMPILER__neuroMaining_Debug /Users/illiabranchuk/AndroidStudioProjects/NeuronMining/NeuroMaining/app/src/main/cpp/Neuron.cpp || cmake_object_order_depends_target_neuroMaining
+  DEFINES = -DneuroMaining_EXPORTS
+  DEP_FILE = CMakeFiles/neuroMaining.dir/Neuron.cpp.o.d
   FLAGS = -std=c++17 -g  -fno-limit-debug-info -fPIC -std=c++11
-  OBJECT_DIR = CMakeFiles/neuro_maining.dir
-  OBJECT_FILE_DIR = CMakeFiles/neuro_maining.dir
+  OBJECT_DIR = CMakeFiles/neuroMaining.dir
+  OBJECT_FILE_DIR = CMakeFiles/neuroMaining.dir
 
 
 # =============================================================================
-# Link build statements for SHARED_LIBRARY target neuro_maining
+# Link build statements for SHARED_LIBRARY target neuroMaining
 
 
 #############################################
-# Link the shared library /Users/illiabranchuk/AndroidStudioProjects/NeuronMining/NeuroMaining/app/build/intermediates/cxx/Debug/1s4t3u16/obj/arm64-v8a/libneuro_maining.so
+# Link the shared library /Users/illiabranchuk/AndroidStudioProjects/NeuronMining/NeuroMaining/app/build/intermediates/cxx/Debug/1s4t3u16/obj/arm64-v8a/libneuroMaining.so
 
-build /Users/illiabranchuk/AndroidStudioProjects/NeuronMining/NeuroMaining/app/build/intermediates/cxx/Debug/1s4t3u16/obj/arm64-v8a/libneuro_maining.so: CXX_SHARED_LIBRARY_LINKER__neuro_maining_Debug CMakeFiles/neuro_maining.dir/neuro_maining.cpp.o CMakeFiles/neuro_maining.dir/Neuron.cpp.o
+build /Users/illiabranchuk/AndroidStudioProjects/NeuronMining/NeuroMaining/app/build/intermediates/cxx/Debug/1s4t3u16/obj/arm64-v8a/libneuroMaining.so: CXX_SHARED_LIBRARY_LINKER__neuroMaining_Debug CMakeFiles/neuroMaining.dir/neuroMaining.cpp.o CMakeFiles/neuroMaining.dir/Neuron.cpp.o
   LANGUAGE_COMPILE_FLAGS = -std=c++17 -g  -fno-limit-debug-info
   LINK_FLAGS = -Wl,--build-id=sha1 -Wl,--no-rosegment -Wl,--fatal-warnings -Qunused-arguments -Wl,--no-undefined
   LINK_LIBRARIES = -landroid  -llog   -static-libstdc++ -latomic -lm
-  OBJECT_DIR = CMakeFiles/neuro_maining.dir
+  OBJECT_DIR = CMakeFiles/neuroMaining.dir
   POST_BUILD = :
   PRE_LINK = :
-  SONAME = libneuro_maining.so
+  SONAME = libneuroMaining.so
   SONAME_FLAG = -Wl,-soname,
-  TARGET_FILE = /Users/illiabranchuk/AndroidStudioProjects/NeuronMining/NeuroMaining/app/build/intermediates/cxx/Debug/1s4t3u16/obj/arm64-v8a/libneuro_maining.so
-  TARGET_PDB = neuro_maining.so.dbg
+  TARGET_FILE = /Users/illiabranchuk/AndroidStudioProjects/NeuronMining/NeuroMaining/app/build/intermediates/cxx/Debug/1s4t3u16/obj/arm64-v8a/libneuroMaining.so
+  TARGET_PDB = neuroMaining.so.dbg
 
 
 #############################################
@@ -110,9 +110,9 @@ build rebuild_cache: phony CMakeFiles/rebuild_cache.util
 # =============================================================================
 # Target aliases.
 
-build libneuro_maining.so: phony /Users/illiabranchuk/AndroidStudioProjects/NeuronMining/NeuroMaining/app/build/intermediates/cxx/Debug/1s4t3u16/obj/arm64-v8a/libneuro_maining.so
+build libneuroMaining.so: phony /Users/illiabranchuk/AndroidStudioProjects/NeuronMining/NeuroMaining/app/build/intermediates/cxx/Debug/1s4t3u16/obj/arm64-v8a/libneuroMaining.so
 
-build neuro_maining: phony /Users/illiabranchuk/AndroidStudioProjects/NeuronMining/NeuroMaining/app/build/intermediates/cxx/Debug/1s4t3u16/obj/arm64-v8a/libneuro_maining.so
+build neuroMaining: phony /Users/illiabranchuk/AndroidStudioProjects/NeuronMining/NeuroMaining/app/build/intermediates/cxx/Debug/1s4t3u16/obj/arm64-v8a/libneuroMaining.so
 
 # =============================================================================
 # Folder targets.
@@ -122,7 +122,7 @@ build neuro_maining: phony /Users/illiabranchuk/AndroidStudioProjects/NeuronMini
 #############################################
 # Folder: /Users/illiabranchuk/AndroidStudioProjects/NeuronMining/NeuroMaining/app/.cxx/Debug/1s4t3u16/arm64-v8a
 
-build all: phony /Users/illiabranchuk/AndroidStudioProjects/NeuronMining/NeuroMaining/app/build/intermediates/cxx/Debug/1s4t3u16/obj/arm64-v8a/libneuro_maining.so
+build all: phony /Users/illiabranchuk/AndroidStudioProjects/NeuronMining/NeuroMaining/app/build/intermediates/cxx/Debug/1s4t3u16/obj/arm64-v8a/libneuroMaining.so
 
 # =============================================================================
 # Built-in targets

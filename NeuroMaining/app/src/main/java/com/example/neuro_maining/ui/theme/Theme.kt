@@ -1,4 +1,4 @@
-package com.example.neuro_maining.ui.theme
+package com.example.neuroMaining.ui.theme
 
 import android.app.Activity
 import android.os.Build

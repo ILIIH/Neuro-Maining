@@ -1,4 +1,4 @@
-package com.example.neuro_maining.screens.outcomeScreen
+package com.example.neuroMaining.screens.outcomeScreen
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -23,7 +23,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import com.example.neuro_maining.data.MiningTask
+import com.example.neuroMaining.data.MiningTask
 
 @Composable
 fun TasksBoardWidget(miningTasks: List<MiningTask>) {
@@ -34,14 +34,14 @@ fun TasksBoardWidget(miningTasks: List<MiningTask>) {
         horizontalArrangement = Arrangement.spacedBy(8.dp),
         verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
-        items( miningTasks.size) { index ->
+        items(miningTasks.size) { index ->
             TasksBoardItem(miningTasks[index])
         }
     }
 }
 
 @Composable
-fun TasksBoardItem(historyItem: MiningTask){
+fun TasksBoardItem(historyItem: MiningTask) {
     Card(
         modifier = Modifier
             .fillMaxWidth()

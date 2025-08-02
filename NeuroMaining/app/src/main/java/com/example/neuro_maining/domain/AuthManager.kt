@@ -1,11 +1,7 @@
-package com.example.neuro_maining.domain
-
-import com.example.neuro_maining.data.AuthStatus
-import kotlinx.coroutines.flow.StateFlow
+package com.example.neuroMaining.domain
 
 interface AuthManager {
-    val authState: StateFlow<AuthStatus>
-    fun authWithBiometry(status: AuthStatus)
-    fun authWithPassword(password: String)
+    fun authWithPassword(password: String): Boolean
     fun registerPassword(password: String)
+    fun isPasswordRegistered(): Boolean
 }

@@ -1,4 +1,4 @@
-package com.example.neuro_maining.screens.homeScreen
+package com.example.neuroMaining.screens.homeScreen
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -22,8 +22,8 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.neuro_maining.ui.theme.PrimaryColor
-import com.example.neuro_maining.R
+import com.example.neuroMaining.R
+import com.example.neuroMaining.ui.theme.PrimaryColor
 
 @Composable
 fun HomeTopbar() {

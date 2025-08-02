@@ -1,13 +1,12 @@
-package com.example.neuro_maining.navigation
+package com.example.neuroMaining.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.example.neuro_maining.screens.authScreen.AuthScreen
-import com.example.neuro_maining.screens.earningsScreen.EarningScreen
-import com.example.neuro_maining.screens.homeScreen.HomeScreen
-import com.example.neuro_maining.screens.outcomeScreen.OutcomeScreen
+import com.example.neuroMaining.screens.earningsScreen.EarningScreen
+import com.example.neuroMaining.screens.homeScreen.HomeScreen
+import com.example.neuroMaining.screens.outcomeScreen.OutcomeScreen
 
 @Composable
 fun AppNavHost(navController: NavHostController) {

@@ -1,4 +1,4 @@
-package com.example.neuro_maining.broadcastReceivers
+package com.example.neuroMaining.broadcastReceivers
 
 import android.app.AlertDialog
 import android.content.BroadcastReceiver

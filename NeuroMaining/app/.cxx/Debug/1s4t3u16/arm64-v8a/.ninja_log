@@ -1,9 +1,14 @@
 # ninja log v5
-168	213	1733173088060497593	/Users/illiabranchuk/AndroidStudioProjects/NeuronMining/NeuroMaining/app/build/intermediates/cxx/Debug/1s4t3u16/obj/arm64-v8a/libneuro_maining.so	efd827a905c5faa2
-0	168	1733173088022708784	CMakeFiles/neuro_maining.dir/neuro_maining.cpp.o	aff5a6f0f8532797
-0	221	1733184271842575519	CMakeFiles/neuro_maining.dir/Neuron.cpp.o	94a1ad091c1f6215
-0	221	1733184271842183563	CMakeFiles/neuro_maining.dir/neuro_maining.cpp.o	74b663061f32a174
-221	274	1733184271889414026	/Users/illiabranchuk/AndroidStudioProjects/NeuronMining/NeuroMaining/app/build/intermediates/cxx/Debug/1s4t3u16/obj/arm64-v8a/libneuro_maining.so	d7e709a6baa321d
-13	572	1734455791546276934	CMakeFiles/neuro_maining.dir/Neuron.cpp.o	94a1ad091c1f6215
-11	572	1734455791546288726	CMakeFiles/neuro_maining.dir/neuro_maining.cpp.o	74b663061f32a174
-572	751	1734455791715956289	/Users/illiabranchuk/AndroidStudioProjects/NeuronMining/NeuroMaining/app/build/intermediates/cxx/Debug/1s4t3u16/obj/arm64-v8a/libneuro_maining.so	d7e709a6baa321d
+168	213	1733173088060497593	/Users/illiabranchuk/AndroidStudioProjects/NeuronMining/NeuroMaining/app/build/intermediates/cxx/Debug/1s4t3u16/obj/arm64-v8a/libneuroMaining.so	efd827a905c5faa2
+0	168	1733173088022708784	CMakeFiles/neuroMaining.dir/neuroMaining.cpp.o	aff5a6f0f8532797
+0	221	1733184271842575519	CMakeFiles/neuroMaining.dir/Neuron.cpp.o	94a1ad091c1f6215
+0	221	1733184271842183563	CMakeFiles/neuroMaining.dir/neuroMaining.cpp.o	74b663061f32a174
+221	274	1733184271889414026	/Users/illiabranchuk/AndroidStudioProjects/NeuronMining/NeuroMaining/app/build/intermediates/cxx/Debug/1s4t3u16/obj/arm64-v8a/libneuroMaining.so	d7e709a6baa321d
+13	572	1734455791546276934	CMakeFiles/neuroMaining.dir/Neuron.cpp.o	94a1ad091c1f6215
+11	572	1734455791546288726	CMakeFiles/neuroMaining.dir/neuroMaining.cpp.o	74b663061f32a174
+572	751	1734455791715956289	/Users/illiabranchuk/AndroidStudioProjects/NeuronMining/NeuroMaining/app/build/intermediates/cxx/Debug/1s4t3u16/obj/arm64-v8a/libneuroMaining.so	d7e709a6baa321d
+42	1807	1753792463847336001	/Users/illiabranchuk/AndroidStudioProjects/NeuronMining/NeuroMaining/app/build/intermediates/cxx/Debug/1s4t3u16/obj/arm64-v8a/libneuroMaining.so	d7e709a6baa321d
+0	5	0	clean	d41dc8ea8e057d89
+0	572	1754004105630414640	CMakeFiles/neuroMaining.dir/neuroMaining.cpp.o	74b663061f32a174
+0	575	1754004105630405557	CMakeFiles/neuroMaining.dir/Neuron.cpp.o	94a1ad091c1f6215
+575	768	1754004105820712629	/Users/illiabranchuk/AndroidStudioProjects/NeuronMining/NeuroMaining/app/build/intermediates/cxx/Debug/1s4t3u16/obj/arm64-v8a/libneuroMaining.so	d7e709a6baa321d

@@ -1,4 +1,4 @@
-package com.example.neuro_maining.screens.outcomeScreen
+package com.example.neuroMaining.screens.outcomeScreen
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -36,35 +36,39 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.neuro_maining.R
-import com.example.neuro_maining.data.MiningTask
+import com.example.neuroMaining.R
+import com.example.neuroMaining.data.MiningTask
 
 @Composable
 fun TopEarningsWidget(miningTasks: List<MiningTask>) {
-    val isExpanded = remember{ mutableStateOf(false) }
+    val isExpanded = remember { mutableStateOf(false) }
 
-    Column(modifier = Modifier
-        .padding(30.dp)
-        .shadow(
-            elevation = 8.dp,
-            shape = RoundedCornerShape(12.dp),
-            clip = false
-        )
-        .border(
-            width = 1.dp,
-            color = Color.Black,
-            shape = RoundedCornerShape(12.dp)
-        )
-        .background(
-            color = Color.White,
-            shape = RoundedCornerShape(12.dp)
-        )
-        .height(
-            if(!isExpanded.value)160.dp
-            else (100+ ((miningTasks.size+1)*50)).dp
-        )
-        .fillMaxWidth()
-        .padding(20.dp),
+    Column(
+        modifier = Modifier
+            .padding(30.dp)
+            .shadow(
+                elevation = 8.dp,
+                shape = RoundedCornerShape(12.dp),
+                clip = false
+            )
+            .border(
+                width = 1.dp,
+                color = Color.Black,
+                shape = RoundedCornerShape(12.dp)
+            )
+            .background(
+                color = Color.White,
+                shape = RoundedCornerShape(12.dp)
+            )
+            .height(
+                if (!isExpanded.value) {
+                    160.dp
+                } else {
+                    (100 + ((miningTasks.size + 1) * 50)).dp
+                }
+            )
+            .fillMaxWidth()
+            .padding(20.dp)
     ) {
         Column {
             Row(
@@ -78,8 +82,11 @@ fun TopEarningsWidget(miningTasks: List<MiningTask>) {
                     modifier = Modifier
                         .size(25.dp)
                         .graphicsLayer(
-                            rotationZ = if(!isExpanded.value) 270f
-                            else 90f
+                            rotationZ = if (!isExpanded.value) {
+                                270f
+                            } else {
+                                90f
+                            }
                         )
                         .clickable {
                             isExpanded.value = !isExpanded.value
@@ -92,7 +99,7 @@ fun TopEarningsWidget(miningTasks: List<MiningTask>) {
 }
 
 @Composable
-fun TopEarningsList(isExpanded: MutableState<Boolean>, miningTasks: List<MiningTask>){
+fun TopEarningsList(isExpanded: MutableState<Boolean>, miningTasks: List<MiningTask>) {
     LazyVerticalGrid(
         columns = GridCells.Fixed(3),
         modifier = Modifier.fillMaxWidth(),
@@ -100,14 +107,14 @@ fun TopEarningsList(isExpanded: MutableState<Boolean>, miningTasks: List<MiningT
         horizontalArrangement = Arrangement.spacedBy(8.dp),
         verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
-        items(if(isExpanded.value) miningTasks.size else 6) { index ->
+        items(if (isExpanded.value) miningTasks.size else 6) { index ->
             TopEarningsItem(miningTasks[index])
         }
     }
 }
 
 @Composable
-fun TopEarningsItem(historyItem: MiningTask){
+fun TopEarningsItem(historyItem: MiningTask) {
     Card(
         modifier = Modifier
             .fillMaxWidth()

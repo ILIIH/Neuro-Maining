@@ -1,4 +1,5 @@
 # ninja log v5
-0	105	1734455792198875348	CMakeFiles/neuro_maining.dir/Neuron.cpp.o	dcdd290e5bf9291e
-0	120	1734455792213881315	CMakeFiles/neuro_maining.dir/neuro_maining.cpp.o	4d72cd9ed26698b4
-120	167	1734455792253557217	/Users/illiabranchuk/AndroidStudioProjects/NeuronMining/NeuroMaining/app/build/intermediates/cxx/Debug/1s4t3u16/obj/armeabi-v7a/libneuro_maining.so	d958247410a8dd34
+0	105	1734455792198875348	CMakeFiles/neuroMaining.dir/Neuron.cpp.o	dcdd290e5bf9291e
+0	120	1734455792213881315	CMakeFiles/neuroMaining.dir/neuroMaining.cpp.o	4d72cd9ed26698b4
+120	167	1734455792253557217	/Users/illiabranchuk/AndroidStudioProjects/NeuronMining/NeuroMaining/app/build/intermediates/cxx/Debug/1s4t3u16/obj/armeabi-v7a/libneuroMaining.so	d958247410a8dd34
+0	13	0	clean	d41dc8ea8e057d89

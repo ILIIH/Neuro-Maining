@@ -1,4 +1,4 @@
-package com.example.neuro_maining.data
+package com.example.neuroMaining.data
 
 import androidx.compose.ui.graphics.Color
 

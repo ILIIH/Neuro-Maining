@@ -1,4 +1,4 @@
-package com.example.neuro_maining.screens.earningsScreen
+package com.example.neuroMaining.screens.earningsScreen
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -32,15 +32,15 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import com.example.neuro_maining.data.MiningTask
-import com.example.neuro_maining.data.getEarningSum
-import com.example.neuro_maining.domain.miningTasks
-import com.example.neuro_maining.R
+import com.example.neuroMaining.R
+import com.example.neuroMaining.data.MiningTask
+import com.example.neuroMaining.data.getEarningSum
+import com.example.neuroMaining.domain.miningTasks
 import kotlin.math.round
 
 @Composable
 fun EarningsList(modifier: Modifier) {
-    val isExpanded = remember{ mutableStateOf(false) }
+    val isExpanded = remember { mutableStateOf(false) }
 
     LazyColumn(
         modifier = modifier
@@ -58,7 +58,7 @@ fun EarningsList(modifier: Modifier) {
                 color = Color.White,
                 shape = RoundedCornerShape(12.dp)
             )
-            .height( if(!isExpanded.value) 300.dp else (miningTasks.size*85).dp),
+            .height(if (!isExpanded.value) 300.dp else (miningTasks.size * 85).dp),
         contentPadding = PaddingValues(8.dp),
         verticalArrangement = Arrangement.Center
     ) {
@@ -77,7 +77,7 @@ fun EarningsList(modifier: Modifier) {
             }
         }
         items(
-            count = if(!isExpanded.value) 3 else miningTasks.size,
+            count = if (!isExpanded.value) 3 else miningTasks.size,
             itemContent = { index ->
                 EarningListItem(miningTasks[index])
             }
@@ -93,7 +93,7 @@ fun EarningsList(modifier: Modifier) {
                     painter = painterResource(id = R.drawable.ic_more),
                     contentDescription = "See more icon",
                     modifier = Modifier.size(30.dp).clickable {
-                        isExpanded.value = true;
+                        isExpanded.value = true
                     }
                 )
             }

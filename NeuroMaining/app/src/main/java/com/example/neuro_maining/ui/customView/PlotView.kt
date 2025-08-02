@@ -1,4 +1,4 @@
-package com.example.neuro_maining.ui.customView
+package com.example.neuroMaining.ui.customView
 
 import android.graphics.Paint
 import android.graphics.Path
@@ -10,7 +10,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.drawscope.DrawContext
 import androidx.compose.ui.graphics.nativeCanvas
 import androidx.compose.ui.graphics.toArgb
-import com.example.neuro_maining.data.MiningTask
+import com.example.neuroMaining.data.MiningTask
 import java.util.Calendar
 
 const val PLOT_MARGIN = 50f

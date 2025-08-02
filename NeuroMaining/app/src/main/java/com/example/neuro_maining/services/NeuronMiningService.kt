@@ -1,4 +1,4 @@
-package com.example.neuro_maining.services
+package com.example.neuroMaining.services
 
 import android.app.Notification
 import android.app.NotificationChannel
@@ -8,7 +8,7 @@ import android.content.Intent
 import android.os.IBinder
 import android.widget.Toast
 import androidx.core.app.NotificationCompat
-import com.example.neuro_maining.R
+import com.example.neuroMaining.R
 import java.io.BufferedReader
 import java.io.IOException
 import java.io.InputStreamReader

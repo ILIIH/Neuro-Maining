@@ -17,11 +17,11 @@
     "{LIST_OF_TARGETS_TO_BUILD}"
   ],
   "libraries": {
-    "neuro_maining::@6890427a1f51a3e7e1df": {
+    "neuroMaining::@6890427a1f51a3e7e1df": {
       "toolchain": "toolchain",
       "abi": "arm64-v8a",
-      "artifactName": "neuro_maining",
-      "output": "/Users/illiabranchuk/AndroidStudioProjects/NeuronMining/NeuroMaining/app/build/intermediates/cxx/Debug/1s4t3u16/obj/arm64-v8a/libneuro_maining.so",
+      "artifactName": "neuroMaining",
+      "output": "/Users/illiabranchuk/AndroidStudioProjects/NeuronMining/NeuroMaining/app/build/intermediates/cxx/Debug/1s4t3u16/obj/arm64-v8a/libneuroMaining.so",
       "runtimeFiles": []
     }
   },

@@ -15,4 +15,3 @@ dependencyResolutionManagement {
 
 rootProject.name = "Neuro-Maining"
 include(":app")
- 

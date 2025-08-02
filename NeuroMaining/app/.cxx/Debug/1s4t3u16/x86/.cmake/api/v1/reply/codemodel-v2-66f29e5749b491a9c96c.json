@@ -27,7 +27,7 @@
 					[
 						0
 					],
-					"name" : "neuro_maining",
+					"name" : "neuroMaining",
 					"targetIndexes" : 
 					[
 						0
@@ -38,9 +38,9 @@
 			[
 				{
 					"directoryIndex" : 0,
-					"id" : "neuro_maining::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-neuro_maining-Debug-bc27f1214e48587cba9f.json",
-					"name" : "neuro_maining",
+					"id" : "neuroMaining::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-neuroMaining-Debug-bc27f1214e48587cba9f.json",
+					"name" : "neuroMaining",
 					"projectIndex" : 0
 				}
 			]

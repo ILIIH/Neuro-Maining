@@ -1,8 +1,9 @@
-package com.example.neuro_maining.data
+package com.example.neuroMaining.data
 
 sealed class AuthStatus {
-    data object Success : AuthStatus()
-    class Error(val errorMessage: String) : AuthStatus()
-    data object Failed: AuthStatus()
-    data object AuthRequired: AuthStatus()
+    data object SuccessAuth : AuthStatus()
+    data object FailedAuth : AuthStatus()
+    data object AuthPasswordRequired : AuthStatus()
+    data object AuthBiometryRequired : AuthStatus()
+    data object RegistrationRequired : AuthStatus()
 }

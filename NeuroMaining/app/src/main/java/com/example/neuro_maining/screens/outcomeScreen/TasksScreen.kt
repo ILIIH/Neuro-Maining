@@ -1,4 +1,4 @@
-package com.example.neuro_maining.screens.outcomeScreen
+package com.example.neuroMaining.screens.outcomeScreen
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -17,9 +17,9 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.neuro_maining.domain.miningTasks
-import com.example.neuro_maining.ui.theme.PrimaryColor
-import com.example.neuro_maining.ui.theme.SecondaryBackgroundColor
+import com.example.neuroMaining.domain.miningTasks
+import com.example.neuroMaining.ui.theme.PrimaryColor
+import com.example.neuroMaining.ui.theme.SecondaryBackgroundColor
 
 @Composable
 fun OutcomeScreen() {
@@ -28,10 +28,11 @@ fun OutcomeScreen() {
             .fillMaxWidth()
             .background(SecondaryBackgroundColor)
     ) {
-        Column ( modifier = Modifier
-            .fillMaxSize()
-            .verticalScroll(rememberScrollState()))
-        {
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .verticalScroll(rememberScrollState())
+        ) {
             TopBar("Tasks library")
             SearchingWidget()
             ClosedTasksWidget(miningTasks.filter { it.isClosed })
@@ -42,7 +43,7 @@ fun OutcomeScreen() {
 }
 
 @Composable
-fun TopBar( screenTitle:String){
+fun TopBar(screenTitle: String) {
     Box(
         modifier = Modifier
             .background(PrimaryColor)
@@ -51,7 +52,7 @@ fun TopBar( screenTitle:String){
         contentAlignment = Alignment.Center
     ) {
         Text(
-            text = screenTitle ,
+            text = screenTitle,
             color = Color.White,
             fontWeight = FontWeight.Bold,
             fontSize = 25.sp,
@@ -59,4 +60,3 @@ fun TopBar( screenTitle:String){
         )
     }
 }
-
